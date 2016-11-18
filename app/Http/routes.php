@@ -42,6 +42,14 @@ Route::post('company/login', 'Company\AuthController@login');
 Route::get('company/logout', 'Company\AuthController@logout');
 Route::get('company/register', 'Company\AuthController@showRegistrationForm');
 Route::post('company/register', 'Company\AuthController@register');
+Route::get('company/profile', [
+    'uses'  =>  'CompanyController@getProfile',
+    'as'    =>  'company.get.profile'
+]);
+Route::post('company/profile/update/{id}', [
+    'uses'  =>  'CompanyController@UpdateProfile',
+    'as'    =>  'company.profile.update'
+]);
 /*End Company*/
 //||||||||||||||||||||||||||||||||||||||||||||||||
 

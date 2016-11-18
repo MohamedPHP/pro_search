@@ -141,6 +141,7 @@
                         </div>
                     </form>
                 </div>
+                <a href="{{ url('company/register') }}" class="btn btn-link">Register As Company</a>
             </div>
         </div>
     </div>

@@ -89,6 +89,19 @@
 								Logout
 							</a>
 						</li>
+                    @elseif (Auth::guard('Company')->check())
+                        <li>
+							<a href="{{ url('company/profile') }}">
+								<i class="fa fa-dashboard" aria-hidden="true"></i>
+								Company profile
+							</a>
+						</li>
+						<li>
+							<a href="{{ url('company/logout') }}">
+								<i class="fa fa-sign-out" aria-hidden="true"></i>
+								Logout
+							</a>
+						</li>
 					@else
 						<li>
 							<a href="{{ url('/login') }}">

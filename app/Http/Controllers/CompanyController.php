@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Company;
-use Illuminate\Support\Facades\Auth;
+
+use Auth;
 
 class CompanyController extends Controller
 {
@@ -89,9 +90,41 @@ class CompanyController extends Controller
         return redirect()->back()->with(['message' => 'The Company "'.$name.'" Deleted Successfully']);
     }
 
-
-    public function companyRegister()
+    public function getProfile()
     {
+        $c_id = Auth::guard('Company')->user()->id;
+
+        $company = Company::find($c_id);
+
+        return view('frontend.company.profile', compact('company'));
+
+    }
+
+    public function UpdateProfile(Request $request, $id)
+    {
+        // `id`, `company_name`, `address`, `username`, `business_type`,
+        // `website`, `hashedcode`, `password`, `founder_date`
+        $this->validate($request, [
+            'company_name'  =>  'required',
+            'address'       =>  'required',
+            'username'      =>  'required|email',
+            'business_type' =>  'required',
+            'password'      =>  'required',
+            'website'       =>  'url',
+            'founder_date'  =>  'required|date',
+        ]);
+        $company = Company::find($id);
+        $company->company_name  = $request['company_name'];
+        $company->address       = $request['address'];
+        $company->username      = $request['username'];
+        $company->website = $request['website'];
+        $company->business_type       = $request['business_type'];
+        $company->password      = $request['password'];
+        $company->founder_date  = $request['founder_date'];
+        $company->save();
+
+        return redirect()->back()->with(['message' => 'The Company Profile Has Been Updated Successfully']);
+
 
     }
 

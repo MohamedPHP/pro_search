@@ -17,7 +17,7 @@ class Company extends Authenticatable
     protected $fillable = [
         'company_name',
         'address',
-        'email',
+        'username',
         'business_type',
         'website',
         'password',

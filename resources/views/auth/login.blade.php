@@ -33,6 +33,7 @@
                         </div>
                     </form>
                 </div>
+                <a href="{{ url('company/login') }}"  class="btn btn-link">LogIn As Company</a>
             </div>
         </div>
     </div>

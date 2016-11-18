@@ -35,7 +35,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li>
-						<a href="/">
+						<a href="{{ url('/') }}">
 							<i class="fa fa-user" aria-hidden="true"></i>
 							Home
 						</a>
@@ -70,6 +70,19 @@
 						</li>
 						<li>
 							<a href="{{ url('/logout') }}">
+								<i class="fa fa-sign-out" aria-hidden="true"></i>
+								Logout
+							</a>
+						</li>
+					@elseif (Auth::guard('Company')->check())
+                        <li>
+							<a href="{{ url('company/profile') }}">
+								<i class="fa fa-dashboard" aria-hidden="true"></i>
+								Company profile
+							</a>
+						</li>
+						<li>
+							<a href="{{ url('company/logout') }}">
 								<i class="fa fa-sign-out" aria-hidden="true"></i>
 								Logout
 							</a>

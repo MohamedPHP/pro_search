@@ -64,7 +64,7 @@ class AuthController extends Controller
         return Validator::make($data, [
             'company_name'   => 'required',
             'address'        => 'required',
-            'email'          => 'required|email|unique:companies',
+            'username'          => 'required|email|unique:companies',
             'business_type'  => 'required',
             'website'        => 'url',
             'password'       => 'required|confirmed',
@@ -83,7 +83,7 @@ class AuthController extends Controller
         $company =  Company::insertGetId([
             'company_name'  => $data['company_name'],
             'address'       => $data['address'],
-            'email'         => $data['email'],
+            'username'         => $data['username'],
             'business_type' => $data['business_type'],
             'website'       => $data['website'],
             'password'      => bcrypt($data['password']),
