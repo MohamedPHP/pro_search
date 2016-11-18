@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2016 at 01:08 AM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 5.6.23
+-- Generation Time: Nov 18, 2016 at 06:39 PM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -30,7 +30,7 @@ CREATE TABLE `companies` (
   `id` int(10) UNSIGNED NOT NULL,
   `company_name` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `business_type` varchar(255) NOT NULL,
   `website` varchar(255) NOT NULL,
   `hashedcode` varchar(255) NOT NULL,
@@ -40,13 +40,6 @@ CREATE TABLE `companies` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `companies`
---
-
-INSERT INTO `companies` (`id`, `company_name`, `address`, `email`, `business_type`, `website`, `hashedcode`, `password`, `founder_date`, `remember_token`, `created_at`, `updated_at`) VALUES
-(2, 'Dezique', 'NasrCity', 'ahmad.tellzm@gmail.com', 'Marketing', 'http://dezique.com/', '#2esfasfmosdnf67', '$2y$10$sn1e66HUJirYZd7gu1WbQe06c0I7DhQ4mjeB460rT9kCG0tpo37v6', '2016-11-02', NULL, '2016-11-16 19:16:15', '2016-11-16 19:40:37');
 
 -- --------------------------------------------------------
 
@@ -60,14 +53,6 @@ CREATE TABLE `jops` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `jops`
---
-
-INSERT INTO `jops` (`id`, `content`, `created_at`, `updated_at`) VALUES
-(1, 'Web Developer', '2016-11-16 19:15:17', '2016-11-16 20:04:03'),
-(2, 'Web Design', '2016-11-16 19:15:32', '2016-11-16 19:15:32');
 
 -- --------------------------------------------------------
 
@@ -127,13 +112,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `password`, `phone`, `email`, `age`, `gender`, `hashedcode`, `jop_id`, `isadmin`, `remember_token`, `created_at`, `updated_at`) VALUES
-(2, 'mohamedPHP', 'Mohamed', 'Zayed', '$2y$10$eol6rJiW7GdShBMDlKJn3OAbHv3Q2.e4M6Ab72jDVT5GXmhRB5DVO', '01127946754', 'mohamedzayed709@yahoo.com', '', '', '', 1, 1, NULL, '2016-11-16 19:48:59', '2016-11-16 19:52:29');
-
---
 -- Indexes for dumped tables
 --
 
@@ -174,17 +152,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `companies`
 --
 ALTER TABLE `companies`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `jops`
 --
 ALTER TABLE `jops`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
