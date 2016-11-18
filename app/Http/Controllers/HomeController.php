@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\jop;
 class HomeController extends Controller
 {
+
     public function index()
     {
     		$jobs = Jop::all();

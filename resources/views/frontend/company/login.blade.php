@@ -4,25 +4,25 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
+            <div class="panel panel-default" style="opacity: 0.7; margin-top:150px;">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="#">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('company/login') }}">
                         {{ csrf_field() }}
-                        <div class="form-group">
-                            <label for="" class="col-md-4 control-label">HashCode</label>
+                        <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-4 control-label">Company Mail</label>
 
                             <div class="col-md-6">
-                                <input id="" type="text" class="form-control" name="Username" value="{{ old('Username') }}">
-                                @if ($errors->has('Username'))
+                                <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}">
+                                @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('Username') }}</strong>
+                                        <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 
                             <div class="col-md-6">
@@ -32,9 +32,6 @@
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
-                                <div class="eyePass">
-                                  <i class="fa fa-eye-slash"></i>
-                                </div>
                             </div>
                         </div>
 

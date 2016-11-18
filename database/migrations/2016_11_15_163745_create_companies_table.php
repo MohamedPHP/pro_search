@@ -13,10 +13,11 @@ class CreateCompaniesTable extends Migration
     public function up()
     {
         Schema::create('companies', function (Blueprint $table) {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0'); // to avoid error during migration
             $table->increments('id');
             $table->string('company_name');
             $table->string('address');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('business_type');
             $table->string('website');
             $table->string('hashedcode');

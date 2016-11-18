@@ -37,7 +37,11 @@ Route::post('/users/profile/update/{id}', [
 
 //||||||||||||||||||||||||||||||||||||||||||||||||
 /*Start Company*/
-
+Route::get('company/login', 'Company\AuthController@showLoginForm');
+Route::post('company/login', 'Company\AuthController@login');
+Route::get('company/logout', 'Company\AuthController@logout');
+Route::get('company/register', 'Company\AuthController@showRegistrationForm');
+Route::post('company/register', 'Company\AuthController@register');
 /*End Company*/
 //||||||||||||||||||||||||||||||||||||||||||||||||
 
