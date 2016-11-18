@@ -1,0 +1,18 @@
+<style>
+
+<link rel="stylesheet" href="bootstrap.min.css" media="screen" title="no title">
+<link rel="stylesheet" href="datatables.bootstrap.min.css" media="screen" title="no title">
+
+</style>
+
+<script src="jquery.js"></script>
+
+<script src="bootstrap.min.js"></script>
+
+<script src="jquery.datatables.min.js"></script>
+
+<script src="datatables.bootstrap.min.js"></script>
+
+<script>
+	$('#tableID').dataTable();
+</script>

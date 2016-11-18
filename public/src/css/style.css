@@ -1,0 +1,143 @@
+/*
+    Styles Start
+*/
+
+
+/* Start Nav Bar */
+
+/* End Nav Bar */
+
+/*nav, .panel{
+    background: none !important;
+}
+body{
+    background: url('../img/header.jpg');
+}*/
+
+/*search*/
+body {
+  text-transform: capitalize;
+
+}
+.searchresult{
+    margin: 10px 0;
+    font-size: 10px;
+    border-left: 5px solid #2c3e50;
+    background-color: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(238, 238, 238, 0.27);
+    color: #ddd;
+}
+.searchresult .row{
+    padding: 15px;
+    margin-bottom:20px;
+}
+.searchresult .row .img-container{
+    border-right: 1px solid #2c3e50;
+}
+.searchresult .row .img-container img{
+    border-radius: 50%;
+}
+/*.searchresult .row .col-md-9 h4
+,.searchresult .row .col-md-9 h5{
+    color: #FFFFFF !important;
+}*/
+.search-bar{
+    background-color: #3498db;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+}
+.searchBox{
+  border-color: #aaa;
+}
+.searchBox:focus{
+  border-color: #7bb73d;
+}
+.searchAjax {
+  position: absolute;
+  width: 460px;
+  border: 1px solid #7bb73d;
+  z-index: 999;
+  right: -21.9%;
+  top: 100%;
+  display: none;
+  background-color: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(238, 238, 238, 0.27);
+  color: #FFFFFF;
+}
+
+.searchAjax .fullName{
+  padding: 10px 0 0 10px;
+  font-size: 15px;
+  color: #fff;
+}
+
+.searchAjax .num,
+.searchAjax .email{
+  font-size: 13px;
+  color: #fff;
+  margin: 10px;
+  padding: 3px;
+  display: none;
+}
+
+.userInfo:hover {
+     background-color: #2C93FF;
+    padding: 0 20px 0;
+    width: 100%;
+    margin-left: 0px;
+    transition: all 0.7s ease-in-out;
+}
+.userInfo {
+  border-bottom: 1px solid #aaa;
+  margin: 0 20px;
+  margin-top: -5px;
+  margin-left: 0px;
+  transition: all 0.7s ease-in-out;
+
+}
+.userInfo:last-child {
+  border-bottom: none;
+}
+
+.eyePass {
+
+  min-width: 5%;
+  max-width: 9%;
+  min-height: 93%;
+  max-height: 93%;
+  position: absolute;
+  right: 16px;
+  top: 1px;
+  transition: all 0.3s ease-in-out;
+  border-radius: 4px;
+}
+
+.eyePass i {
+  padding: 27%;
+}
+
+.eyePass i:hover{
+  color: #3498db;
+}
+
+.eyePass2 {
+
+  min-width: 5%;
+  max-width: 6%;
+  min-height: 93%;
+  max-height: 93%;
+  position: absolute;
+  right: 16px;
+  top: 1px;
+  transition: all 0.3s ease-in-out;
+  border-radius: 4px;
+}
+
+.eyePass2 i {
+  padding: 27%;
+}
+
+.eyePass2 i:hover{
+  color: #3498db;
+}
