@@ -4,13 +4,19 @@
  * Autor: Creative Tim
  * Web-autor: creative.tim
  * Web script: http://creative-tim.com
- * 
+ *
  */
- 
+
 /*  Shake animation  */
 
 @charset "UTF-8";
-
+@font-face {
+    font-family: Arciformimport;
+    src: url('Arciform.otf');
+}
+body{
+    font-family: Arciformimport !important;
+}
 .animated {
   -webkit-animation-duration: 1s;
 	   -moz-animation-duration: 1s;

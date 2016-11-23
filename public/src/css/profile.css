@@ -3,9 +3,13 @@ User Profile Sidebar by @keenthemes
 A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
 Licensed under MIT
 ***/
-
+@font-face {
+    font-family: Arciformimport;
+    src: url('Arciform.otf');
+}
 body {
   background: #F1F3FA;
+  font-family: Arciformimport !important;
 }
 
 /* Profile container */

@@ -15,9 +15,17 @@ body{
 }*/
 
 /*search*/
+@font-face {
+    font-family: Arciformimport;
+    src: url('Arciform.otf');
+}
 body {
   text-transform: capitalize;
-
+  font-family: Arciformimport !important;
+}
+.logoPng{
+    width: 65px;
+    margin-top: -33px;
 }
 .searchresult{
     margin: 10px 0;

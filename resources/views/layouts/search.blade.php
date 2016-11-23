@@ -12,10 +12,9 @@
 
      <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<link rel="stylesheet" href="{{ asset('src/css/style.css') }}" media="screen" title="no title">
 	<link rel="stylesheet" href="{{ asset('src/css/coming-sssoon.css') }}" media="screen" title="no title">
 	<link rel="stylesheet" href="{{ asset('src/css/login-register.css') }}" media="screen" title="no title">
-
+	<link rel="stylesheet" href="{{ asset('src/css/style.css') }}" media="screen" title="no title">
 </head>
 
 <body>
@@ -36,8 +35,7 @@
 				<ul class="nav navbar-nav">
 					<li>
 						<a href="{{ url('/') }}">
-							<i class="fa fa-user" aria-hidden="true"></i>
-							Home
+							<img src="{{ asset('src/images/logo.png') }}" class="logoPng" alt="logo image">
 						</a>
 					</li>
 					@if (Auth::check())

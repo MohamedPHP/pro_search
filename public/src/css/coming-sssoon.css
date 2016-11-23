@@ -3,9 +3,12 @@
 Made with love by Creative Tim (http://www.creative-tim.com)
 
 */
-
+@font-face {
+    font-family: Arciformimport;
+    src: url('Arciform.otf');
+}
 body{
-
+    font-family: Arciformimport !important;
 }
 .form-control::-moz-placeholder{
    color: #DDDDDD;
@@ -737,7 +740,7 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
     z-index: 3;
 }
 .main .logo.cursive{
-    font-family: 'Grand Hotel',cursive;
+    font-family: Arciformimport;
     font-size: 50px;
 
 }

@@ -20,7 +20,7 @@ class APIController extends Controller
 
     public function allUsers()
     {
-    	return Response::json($this->user->all(),200);
+         return Response::json(['result' => $this->user->all()],200);
     }
     public function getUser($id)
     {
