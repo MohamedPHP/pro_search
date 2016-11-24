@@ -60,7 +60,7 @@
                             <label for="business_type" class="col-md-4 control-label">business_type</label>
 
                             <div class="col-md-6">
-                                <select class="form-control input" id="business_type" name="business_type" required>
+                                <select class="js-example-data-array form-control input" id="business_type" name="business_type" required>
                                     @foreach (App\BussnessType::all() as $b)
                                         <option value="{{$b->id}}">{{$b->bussness_type}}</option>
                                     @endforeach
