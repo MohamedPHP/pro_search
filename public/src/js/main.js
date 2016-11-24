@@ -5,6 +5,11 @@ $(document).ready(function() {
       var type = $('#searchType');
       var fillter = $('#fillter');
       var results = $('.results');
+      if(fillter.hasClass('hidden')){
+        $('#place').removeClass('col-md-4').addClass('col-md-6').end();
+        $('#place').removeClass('col-md-offset-3').addClass('col-md-offset-4');
+
+      }
       // start send the data when the user keyup from the search box
       search.on('keyup', function() {
         $.ajax({
@@ -32,20 +37,36 @@ $(document).ready(function() {
       });
       // start send the data when the user change the type box
       type.on('change', function() {
-        $.ajax({
-          method: 'GET',
-          url: url,
-          data: { body: search.val(), type: type.val(), fillter: fillter.val(), _token: token},
-
-        }).done(function(msg) {
-          // check if the response undifined and hide it to give more security
-          if(msg['results'] === undefined ){
-            results.html('<div class="alert alert-info text-center" style="margin-top:20px;">Not Found</div>');
-          }else{
-            // view the response with json
-            results.html(msg['results']);
+          var opt = '';
+          if ($(this).val() == 0 ) {
+            opt += '<option value="name"><a href="#">Name</a></option>';
+            opt += '<option value="phone"><a href="#">Phone Number</a></option>';
+            opt += '<option value="email"><a href="#">email</a></option>';
+            opt += '<option value="Job"><a href="#">Job</a></option>';
+            fillter.removeClass('hidden').html(opt);
           }
-        });
+          if ($(this).val() == 1 ) {
+            opt += '<option value="name"><a href="#">Company Name</a></option>';
+            opt += '<option value="email"><a href="#">Company email</a></option>';
+            opt += '<option value="Job"><a href="#">Company Bussiness</a></option>';
+            fillter.removeClass('hidden').html(opt);
+          }
+          $('#place').removeClass('col-md-6').addClass('col-md-4').end();
+          $('#place').removeClass('col-md-offset-4').addClass('col-md-offset-3');
+          $.ajax({
+              method: 'GET',
+              url: url,
+              data: { body: search.val(), type: type.val(), fillter: fillter.val(), _token: token},
+
+            }).done(function(msg) {
+              // check if the response undifined and hide it to give more security
+              if(msg['results'] === undefined ){
+                results.html('<div class="alert alert-info text-center" style="margin-top:20px;">Not Found</div>');
+              }else{
+                // view the response with json
+                results.html(msg['results']);
+              }
+            });
       });
       // start send the data when the user change the fillter box
       fillter.on('change', function() {

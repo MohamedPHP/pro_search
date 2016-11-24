@@ -1,4 +1,4 @@
-<form action="{{ route('search') }}" method="post" class="form-inline" role="form">
+<form action="{{ route('search') }}" id="searchForm" method="post" class="form-inline" role="form">
      {{ csrf_field() }}
 
      <div class="input-group">
@@ -9,11 +9,7 @@
                </select>
           </div><!-- /btn-group -->
           <div class="input-group-btn">
-               <select class="form-control transparent-select" style="width: auto;margin-top: -1px;" name="fillter" id="fillter">
-                    <option value="name"><a href="#">Name</a></option>
-                    <option value="phone"><a href="#">Phone Number</a></option>
-                    <option value="email"><a href="#">email</a></option>
-                    <option value="Job"><a href="#">Job</a></option>
+               <select class="form-control transparent-select hidden" style="width: auto;margin-top: -1px;" name="fillter" id="fillter">
                </select>
           </div><!-- /btn-group -->
           <div class="form-group">

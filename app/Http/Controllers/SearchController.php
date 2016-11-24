@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Company;
+use App\BussnessType;
 use App\Jop;
 class SearchController extends Controller
 {
@@ -56,9 +57,12 @@ class SearchController extends Controller
           	    $searchResultsCompany = Company::where('company_name', 'like', "$searchWord%")
           	    ->orderBy('company_name', 'ASC')->get();
               }elseif($searchType == 'Job'){
-                   // get the matched data
-                   $searchResultsCompany = Company::where('business_type', 'like', "$searchWord%")
-                  ->orderBy('company_name', 'ASC')->get();
+                   // join to get the users that related to the job by advanced join
+                  $searchResultsCompany = BussnessType::join('companies', function($j) use($searchWord) {
+                       $j->on('companies.business_type', '=', 'bussness_types.id')
+                       ->where('bussness_types.bussness_type', 'like', "$searchWord%");
+                  })
+                  ->get();
              }elseif($searchType == 'email') {
                    // get the matched data
           	    $searchResultsCompany = Company::where('email', 'like', "$searchWord%")->orderBy('company_name', 'ASC')->get();
@@ -129,21 +133,24 @@ class SearchController extends Controller
                          // get the matched data
                 	    $searchResultsCompany = Company::where('email', 'like', "$searchWord%")->orderBy('company_name', 'ASC')->get();
                     }elseif($searchType == 'Job'){
-                         // get the matched data
-                         $searchResultsCompany = Company::where('business_type', 'like', "$searchWord%")
-                        ->orderBy('company_name', 'ASC')->get();
+                      // join to get the users that related to the job by advanced join
+                     $searchResultsCompany = BussnessType::join('companies', function($j) use($searchWord) {
+                          $j->on('companies.business_type', '=', 'bussness_types.id')
+                          ->where('bussness_types.bussness_type', 'like', "$searchWord%");
+                     })
+                     ->get();
                    }
 
      			// loop the data
      			foreach($searchResultsCompany as $results){
-     				$AjaxResult .=
-     				'
-     				<div class="userInfo">
-     				<h4 class="fullName"><i class="fa fa-user"></i> '. $results->company_name .'</h4>';
-                         $AjaxResult .='<h4 class="email"><i class="fa fa-envelope"></i> '. $results->email .'</h4>
-     				';
-                         $AjaxResult .=' <h4 class="num"><i class="fa fa-briefcase"></i> '. $results->business_type .'</h4>';
-     				$AjaxResult .= '</div>';
+            $AjaxResult .=
+            '
+            <div class="userInfo">
+            <h4 class="fullName"><i class="fa fa-user"></i> '. $results->company_name .'</h4>';
+            $AjaxResult .='<h4 class="email"><i class="fa fa-envelope"></i> '. $results->email .'</h4>
+            ';
+            $AjaxResult .=' <h4 class="num"><i class="fa fa-briefcase"></i> '.\App\BussnessType::where('id', $results->business_type)->first()->bussness_type .'</h4>';
+            $AjaxResult .= '</div>';
      			}
                     // return the response by json
                return response()->json(['results' => $AjaxResult], 200);
