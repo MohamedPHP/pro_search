@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default" style="opacity: 0.7; margin-top:80px;">
+            <div class="panel panel-default" style="opacity: 0.7; margin-top:150px;">
                 <div class="panel-body">
                     <h3 class="text-center text-primary">Register</h3>
                     <hr>
@@ -14,10 +14,10 @@
                         {{ csrf_field() }}
                         {{-- Start Username --}}
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                            <label for="Username" class="col-md-4 control-label">Username</label>
+                            <label for="username" class="col-md-4 control-label">Username</label>
 
                             <div class="col-md-6">
-                                <input id="Username" type="text" class="form-control" name="username" value="{{ old('Username') }}">
+                                <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}">
                                 @if ($errors->has('username'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('username') }}</strong>

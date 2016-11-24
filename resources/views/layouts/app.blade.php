@@ -51,14 +51,12 @@
 				<ul class="nav navbar-nav">
                     <li>
                         <a href="/">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                            Home
+                            <a href="{{ url('/') }}">
+    							<img src="{{ asset('src/images/logo.png') }}" class="logoPng" alt="logo image">
+    						</a>
                         </a>
                     </li>
 					@if (Auth::check())
-						<li>
-							<img src="http://placehold.it/50x50" class="img-circle" alt="" />
-						</li>
 						<li>
 							<a href="#">
 								<i class="fa fa-user" aria-hidden="true"></i>

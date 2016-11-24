@@ -83,7 +83,12 @@
                             <h5 for="business_type">business_type</h5>
                         </div>
                         <div class="col-md-4">
-                            <input type="text" class="form-control input" id="business_type" name="business_type" value="{{ $company->business_type }}" required autocomplete="off">
+                            {{-- <input type="text" class="form-control input" id="business_type" name="business_type" value="{{ $company->business_type }}" required autocomplete="off"> --}}
+                            <select class="form-control input" id="business_type" name="business_type" required>
+                                @foreach (App\BussnessType::all() as $b)
+                                    <option value="{{$b->id}}" {{ $b->id == $company->business_type  ? 'selected' : ''}}>{{$b->bussness_type}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     {{-- End business_type --}}

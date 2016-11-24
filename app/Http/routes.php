@@ -180,6 +180,33 @@ Route::group(['middleware' => 'auth'], function (){
             'as'   => 'jop.delete'
         ]);
         // End Jops
+
+        // Start bussnesstypes
+        Route::get('/bussnesstypes', [
+            'uses' => 'Bussness_typesController@index',
+            'as'   => 'bussnesstypes.index'
+        ]);
+        Route::get('/bussnesstypes/create', [
+            'uses' => 'Bussness_typesController@getcreate',
+            'as'   => 'bussnesstypes-get-create'
+        ]);
+        Route::post('/bussnesstypes/create', [
+            'uses' => 'Bussness_typesController@create',
+            'as'   => 'bussnesstypes.create'
+        ]);
+        Route::get('/bussnesstypes/update/{id}', [
+            'uses' => 'Bussness_typesController@viewUpdate',
+            'as'   => 'bussnesstypes-get-update'
+        ]);
+        Route::post('/bussnesstypes/update/post/{id}', [
+            'uses' => 'Bussness_typesController@update',
+            'as'   => 'bussnesstypes.update'
+        ]);
+        Route::get('/bussnesstypes/delete/{id}', [
+            'uses' => 'Bussness_typesController@delete',
+            'as'   => 'bussnesstypes.delete'
+        ]);
+        // End bussnesstypes
         Route::get('/tables', function (){
             return view('backend.pages.tables');
         });

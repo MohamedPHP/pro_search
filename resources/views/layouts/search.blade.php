@@ -40,9 +40,6 @@
 					</li>
 					@if (Auth::check())
 						<li>
-							<img src="http://placehold.it/50x50" class="img-circle" alt="" />
-						</li>
-						<li>
 							<a href="#">
 								<i class="fa fa-user" aria-hidden="true"></i>
 								{{ Auth::user()->username }}

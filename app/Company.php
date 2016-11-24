@@ -7,6 +7,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Company extends Authenticatable
 {
 
+    public function bussness_types()
+    {
+        return $this->hasOne('App\BussnessType');
+    }
+
     protected $table = 'companies';
     /**
      * The attributes that are mass assignable.

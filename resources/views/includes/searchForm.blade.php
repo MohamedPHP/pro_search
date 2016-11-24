@@ -3,13 +3,13 @@
 
      <div class="input-group">
           <div class="input-group-btn">
-               <select class="form-control transparent-select" style="width: auto;" name="searchType" id="searchType">
+               <select class="form-control transparent-select" style="width: auto;margin-top: -1px;" name="searchType" id="searchType">
                     <option value="0"><a href="#">persone</a></option>
                     <option value="1"><a href="#">company</a></option>
                </select>
           </div><!-- /btn-group -->
           <div class="input-group-btn">
-               <select class="form-control transparent-select" style="width: auto;" name="fillter" id="fillter">
+               <select class="form-control transparent-select" style="width: auto;margin-top: -1px;" name="fillter" id="fillter">
                     <option value="name"><a href="#">Name</a></option>
                     <option value="phone"><a href="#">Phone Number</a></option>
                     <option value="email"><a href="#">email</a></option>

@@ -103,7 +103,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="phone">business_type</label>
-                                <input type="text" class="form-control" id="business_type" name="business_type" placeholder="business_type" value="{{ $company->business_type }}">
+                                <select class="form-control input" id="business_type" name="business_type" required>
+                                    @foreach (App\BussnessType::all() as $b)
+                                        <option value="{{$b->id}}" {{ $b->id == $company->business_type ? 'selected' : '' }}>{{$b->bussness_type}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="phone">founder_date</label>

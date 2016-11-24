@@ -60,7 +60,11 @@
                             <label for="business_type" class="col-md-4 control-label">business_type</label>
 
                             <div class="col-md-6">
-                                <input id="business_type" type="business_type" class="form-control" name="business_type" value="{{ old('business_type') }}">
+                                <select class="form-control input" id="business_type" name="business_type" required>
+                                    @foreach (App\BussnessType::all() as $b)
+                                        <option value="{{$b->id}}">{{$b->bussness_type}}</option>
+                                    @endforeach
+                                </select>
                                 @if ($errors->has('business_type'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('business_type') }}</strong>

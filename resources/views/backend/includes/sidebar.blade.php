@@ -6,8 +6,8 @@
     -->
 
     <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text">
-            Creative Tim
+        <a href="#" class="simple-text">
+            Dezique
         </a>
     </div>
 
@@ -53,6 +53,20 @@
                 <a href="{{ url('/admin/jops/create') }}">
                     <i class="material-icons">schedule</i>
                     <p>Jops-Create</p>
+                </a>
+            </li>
+
+
+            <li class="{{ $pagename == 'BussnessTypes' ? 'active' : '' }}">
+                <a href="{{ route('bussnesstypes.index') }}">
+                    <i class="material-icons">schedule</i>
+                    <p>BussnessTypes</p>
+                </a>
+            </li>
+            <li class="{{ $pagename == 'BussnessTypes-Create' ? 'active' : '' }}">
+                <a href="{{ route('bussnesstypes-get-create') }}">
+                    <i class="material-icons">schedule</i>
+                    <p>BussnessTypes-Create</p>
                 </a>
             </li>
         </ul>
