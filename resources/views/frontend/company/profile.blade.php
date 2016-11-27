@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    Company Profile
+@endsection
+
 @section('styles')
     <link rel="stylesheet" href="{{ asset('src/css/profile.css') }}" media="screen" title="no title">
     <style media="screen">

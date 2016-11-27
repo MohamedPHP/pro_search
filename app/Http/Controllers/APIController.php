@@ -41,7 +41,19 @@ class APIController extends Controller
     public function saveUser(Request $request)
     {
         $user = new User();
-        
+
+        $user->username  = $request['username'];
+        $user->firstname = $request['firstname'];
+        $user->lastname  = $request['lastname'];
+        $user->password  = bcrypt($request['password']);
+        $user->phone     = $request['phone_no'];
+        $user->email     = $request['email'];
+        $user->age       = $request['age'];
+        $user->gender    = $request['gender'];
+        $user->jop_id    = $request['jop_title'];
+
+        $user->save();
+
     	if(!$user){
     		return Response::json(['response' => "Error Saving The User!"], 400);
     	}
