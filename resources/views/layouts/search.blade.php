@@ -35,7 +35,7 @@
 				<ul class="nav navbar-nav">
 					<li>
 						<a href="{{ url('/') }}">
-							<img src="{{ asset('src/images/logo.png') }}" class="logoPng" alt="logo image">
+							<img src="{{ asset('src/images/logo.png') }}" class="logoPng2" alt="logo image">
 						</a>
 					</li>
 					@if (Auth::check())

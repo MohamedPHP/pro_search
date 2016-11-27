@@ -25,7 +25,11 @@ body {
 }
 .logoPng{
     width: 65px;
-    margin-top: -33px;
+    margin-top: -65px;
+}
+.logoPng2{
+    width: 65px;
+    margin-top: -36px;
 }
 .searchresult{
     margin: 10px 0;
@@ -148,4 +152,9 @@ body {
 
 .eyePass2 i:hover{
   color: #3498db;
+}
+
+
+input[type=password]{
+    font-size: 25px;
 }

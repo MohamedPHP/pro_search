@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default" style="opacity: 0.7; margin-top:150px;">
+            <div class="panel panel-default" style="opacity: 0.7; margin-top:120px;">
                 <div class="panel-body">
                     <h3 class="text-center text-primary">Register</h3>
                     <hr>
@@ -90,6 +90,7 @@
                             <label for="jop_id" class="col-md-4 control-label">Jop Title</label>
                             <div class="col-md-6">
                                 <select class="js-example-data-array form-control" name="jop_id">
+                                    <option value="">------------ Select Jop ------------</option>
                                     @foreach (App\Jop::all() as $jop)
                                         <option value="{{ $jop->id }}">{{ $jop->content }}</option>
                                     @endforeach
@@ -102,6 +103,38 @@
                             </div>
                         </div>
                         {{-- End Jop --}}
+
+                        {{-- Start Gender --}}
+                        <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
+                            <label for="gender" class="col-md-4 control-label">gender</label>
+                            <div class="col-md-6">
+                                <select class="form-control" name="gender">
+                                    <option value="">------------ Select Gender ------------</option>
+                                    <option value="0">Male</option>
+                                    <option value="1">Female</option>
+                                </select>
+                                @if ($errors->has('gender'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('gender') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        {{-- End Gender --}}
+
+                        {{-- Start age --}}
+                        <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
+                            <label for="age" class="col-md-4 control-label">age</label>
+                            <div class="col-md-6">
+                                <input id="age" type="number" class="form-control" name="age" value="{{ old('age') }}">
+                                @if ($errors->has('age'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('age') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        {{-- End age --}}
 
                         {{-- Start Password --}}
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">

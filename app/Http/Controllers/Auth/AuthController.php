@@ -64,7 +64,9 @@ class AuthController extends Controller
             'password'  => 'required|min:6|confirmed',
             'phone'     => 'required|unique:users',
             'email'     => 'required|unique:users',
-            'jop_id'     => 'required',
+            'jop_id'    => 'required',
+            'gender'    => 'required',
+            'age'       => 'required|numeric',
         ]);
     }
 
@@ -83,7 +85,9 @@ class AuthController extends Controller
             'password'  => bcrypt($data['password']),
             'phone'     => $data['phone'],
             'email'     => $data['email'],
-            'jop_id'     => $data['jop_id'],
+            'jop_id'    => $data['jop_id'],
+            'gender'    => $data['gender'],
+            'age'       => $data['age'],
         ]);
 
         $hashcode = '#' . $user . $data['username'] . rand(0, 1000);
