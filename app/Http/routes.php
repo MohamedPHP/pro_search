@@ -17,8 +17,10 @@ Route::get('/', [
 
 // Auth
 Route::auth();
+// Auth End
 
-//||||||||||||||||||||||||||||||||||||||||||||||||
+
+
 
 /*Start User*/
 Route::get('/users/profile', [
@@ -31,11 +33,12 @@ Route::post('/users/profile/update/{id}', [
 ]);
 /*End User*/
 
-//||||||||||||||||||||||||||||||||||||||||||||||||
 
 
 
-//||||||||||||||||||||||||||||||||||||||||||||||||
+
+
+
 /*Start Company*/
 Route::get('company/login', 'Company\AuthController@showLoginForm');
 Route::post('company/login', 'Company\AuthController@login');
@@ -51,20 +54,8 @@ Route::post('company/profile/update/{id}', [
     'as'    =>  'company.profile.update'
 ]);
 /*End Company*/
-//||||||||||||||||||||||||||||||||||||||||||||||||
 
 
-
-
-//||||||||||||||||||||||||||||||||||||||||||||||||
-/*Start Jop*/
-
-/*End Jop*/
-//||||||||||||||||||||||||||||||||||||||||||||||||
-
-
-
-//||||||||||||||||||||||||||||||||||||||||||||||||
 /*Start search*/
 Route::group(['prefix' => '/search'], function() {
      Route::post('/results', [
@@ -78,12 +69,12 @@ Route::group(['prefix' => '/search'], function() {
      ]);
 });
 /*End search*/
-//||||||||||||||||||||||||||||||||||||||||||||||||
 
 
 
-//|||||||||||||||||||||| /* " ' {{  Start Admin   }} ' " */ ||||||||||||||||||||||||||
 
+
+/*Start Admin*/
 
 Route::group(['middleware' => 'auth'], function (){
 
@@ -93,6 +84,7 @@ Route::group(['middleware' => 'auth'], function (){
             'uses' => 'UserController@dashboard',
             'as'   => 'dashboard.index'
         ]);
+        
         // Start users
         Route::get('/users', [
             'uses' => 'UserController@index',
@@ -145,15 +137,8 @@ Route::group(['middleware' => 'auth'], function (){
             'uses' => 'CompanyController@delete',
             'as'   => 'company.delete'
         ]);
-
-        #frontend start
-        Route::get('/company/register', [
-            'uses' => 'CompanyController@companyRegister',
-            'as'   => 'company.register'
-        ]);
-        #frontend end
-
         // End Companies
+
         // Start Jops
         Route::get('/jops', [
             'uses' => 'JopController@index',
@@ -207,28 +192,21 @@ Route::group(['middleware' => 'auth'], function (){
             'as'   => 'bussnesstypes.delete'
         ]);
         // End bussnesstypes
-        Route::get('/tables', function (){
-            return view('backend.pages.tables');
-        });
-
     });
-
 });
+/*End Admin*/
 
-
-//|||||||||||||||||||||| /* " ' {{  End Admin   }} ' " */ ||||||||||||||||||||||||||
-
+/*Start User Web Survice*/
 Route::group(['prefix'=>'api'], function(){
 	Route::group(['prefix'=>'user'],function(){
 
-		Route::get('',['uses'=>'APIController@allUsers']);
+		Route::get('get',['uses'=>'APIController@allUsers']);
 
-		Route::get('{id}',['uses'=>'APIController@getUser']);
+		Route::get('get/{id}',['uses'=>'APIController@getUser']);
 
-		Route::post('',['uses'=>'APIController@saveUser']);
+		Route::post('save',['uses'=>'APIController@saveUser']);
 
-		Route::put('{id}',['uses'=>'APIController@updateUser']);
-
-		Route::delete('{id}',['uses'=>'APIController@deleteUser']);
+		Route::post('update/{id}',['uses'=>'APIController@updateUser']);
 	});
 });
+/*End User Web Survice*/
