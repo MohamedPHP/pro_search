@@ -31,7 +31,7 @@ class APIController extends Controller
     	$user = $this->user->find($id);
 
     	if(!$user){
-    		return Response::json(['response'=>"Not Found!"], 400);
+    		return Response::json(['response' => "Not Found!"], 400);
     	}
 
     	return Response::json(['result' => $user],200);
@@ -41,12 +41,12 @@ class APIController extends Controller
     public function saveUser()
     {
         $user = new User();
-        
+
     	if(!$user){
-    		return Response::json(['response'=>"Error Saving The User!"], 400);
+    		return Response::json(['response' => "Error Saving The User!"], 400);
     	}
 
-    	return Response::json(['response'=>"Saved Successfully!"], 200);
+    	return Response::json(['response' => "Saved Successfully!"], 200);
     }
 
 
@@ -55,10 +55,10 @@ class APIController extends Controller
     	$user =  $this->user->find($id);
 
     	if(!$user){
-    		return Response::json(['response'=>"Error Updating The User!"], 400);
+    		return Response::json(['response' => "Error Updating The User!"], 400);
     	}
 
-    	return Response::json(['response'=>"Updated Successfully!"], 200);
+    	return Response::json(['response' => "Updated Successfully!"], 200);
 
     }
 
