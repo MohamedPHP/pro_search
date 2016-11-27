@@ -5,11 +5,6 @@ $(document).ready(function() {
       var type = $('#searchType');
       var fillter = $('#fillter');
       var results = $('.results');
-      if(fillter.hasClass('hidden')){
-        $('#place').removeClass('col-md-4').addClass('col-md-6').end();
-        $('#place').removeClass('col-md-offset-3').addClass('col-md-offset-4');
-
-      }
       // start send the data when the user keyup from the search box
       search.on('keyup', function() {
         $.ajax({
@@ -38,21 +33,20 @@ $(document).ready(function() {
       // start send the data when the user change the type box
       type.on('change', function() {
           var opt = '';
+          fillter.html('');
           if ($(this).val() == 0 ) {
             opt += '<option value="name"><a href="#">Name</a></option>';
             opt += '<option value="phone"><a href="#">Phone Number</a></option>';
             opt += '<option value="email"><a href="#">email</a></option>';
             opt += '<option value="Job"><a href="#">Job</a></option>';
-            fillter.removeClass('hidden').html(opt);
+            fillter.html(opt);
           }
           if ($(this).val() == 1 ) {
             opt += '<option value="name"><a href="#">Company Name</a></option>';
             opt += '<option value="email"><a href="#">Company email</a></option>';
             opt += '<option value="Job"><a href="#">Company Bussiness</a></option>';
-            fillter.removeClass('hidden').html(opt);
+            fillter.html(opt);
           }
-          $('#place').removeClass('col-md-6').addClass('col-md-4').end();
-          $('#place').removeClass('col-md-offset-4').addClass('col-md-offset-3');
           $.ajax({
               method: 'GET',
               url: url,

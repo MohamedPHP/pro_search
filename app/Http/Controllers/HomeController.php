@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\jop;
+use App\Jop;
 class HomeController extends Controller
 {
 
-    public function index()
-    {
-    		$jobs = Jop::all();
-		return view('index', compact('jobs'));
-    }
+  public function index()
+  {
+    $jobs = Jop::all();
+    return view('index', compact('jobs'));
+  }
 }
