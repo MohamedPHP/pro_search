@@ -39,12 +39,6 @@
 						</a>
 					</li>
 					@if (Auth::check())
-						<li>
-							<a href="#">
-								<i class="fa fa-user" aria-hidden="true"></i>
-								{{ Auth::user()->username }}
-							</a>
-						</li>
 						@if (Auth::user()->isadmin == 1)
 							<li>
 								<a href="{{ url('/admin/dashboard') }}">
@@ -59,8 +53,8 @@
 					@if (Auth::check())
 						<li>
 							<a href="{{ url('users/profile') }}">
-								<i class="fa fa-dashboard" aria-hidden="true"></i>
-								profile
+								<i class="fa fa-user" aria-hidden="true"></i>
+								{{ Auth::user()->username }}
 							</a>
 						</li>
 						<li>

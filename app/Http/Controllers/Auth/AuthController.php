@@ -90,7 +90,11 @@ class AuthController extends Controller
             'age'       => $data['age'],
         ]);
 
-        $hashcode = '#' . $user . $data['username'] . rand(0, 1000);
+        $fristname = str_split($data['fristname'], 2);
+        $lastname = str_split($data['lastname'], 2);
+
+
+        $hashcode = '#' . $user . $fristname[0] . $lastname[0] . rand(0, 1000);
 
 
         $user2 = User::find($user);

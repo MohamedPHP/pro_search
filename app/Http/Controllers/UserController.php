@@ -58,7 +58,11 @@ class UserController extends Controller
         $user->save();
 
 
-        $hashcode = '#' . $user->id . $user->firstname . rand(0, 1000);
+        $fristname = str_split($user->firstname, 2);
+        $lastname = str_split($user->lastname, 2);
+
+
+        $hashcode = '#' . $user->id . $fristname[0] . $lastname[0] . rand(0, 1000);
 
 
         $user2 = User::find($user->id);

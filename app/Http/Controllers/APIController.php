@@ -38,10 +38,10 @@ class APIController extends Controller
     }
 
 
-    public function saveUser()
+    public function saveUser(Request $request)
     {
         $user = new User();
-
+        
     	if(!$user){
     		return Response::json(['response' => "Error Saving The User!"], 400);
     	}
@@ -50,7 +50,7 @@ class APIController extends Controller
     }
 
 
-    public function updateUser($id)
+    public function updateUser(Request $request, $id)
     {
     	$user =  $this->user->find($id);
 
