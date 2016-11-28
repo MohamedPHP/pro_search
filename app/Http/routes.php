@@ -84,7 +84,7 @@ Route::group(['middleware' => 'auth'], function (){
             'uses' => 'UserController@dashboard',
             'as'   => 'dashboard.index'
         ]);
-        
+
         // Start users
         Route::get('/users', [
             'uses' => 'UserController@index',
@@ -210,3 +210,23 @@ Route::group(['prefix'=>'api'], function(){
 	});
 });
 /*End User Web Survice*/
+
+
+
+
+/*Start Company Web Survice*/
+Route::group(['prefix'=>'api'], function(){
+
+	Route::group(['prefix'=>'company'],function(){
+
+		Route::get('get',['uses'=>'APICompanyController@allCompanies']);
+
+		Route::get('get/{id}',['uses'=>'APICompanyController@getCompany']);
+
+		Route::post('save', 'APICompanyController@saveCompany');
+
+		Route::post('update/{id}', 'APICompanyController@updateCompany');
+	});
+    
+});
+/*End Company Web Survice*/

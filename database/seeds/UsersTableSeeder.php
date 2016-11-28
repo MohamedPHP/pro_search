@@ -13,42 +13,38 @@ class UsersTableSeeder extends Seeder
     {
        DB::statement('SET FOREIGN_KEY_CHECKS=0');
        DB::table('users')->truncate();
-
+       /*
+       `id`, `username`, `firstname`, `lastname`, `password`, `phone`, `email`,
+       `age`, `gender`, `hashedcode`, `jop_id`, `isadmin`,
+       */
        $Users = [
          [
                'id'           => 1,
-               'username'     => 'alaaDragneel',
-               'firstname'    => 'mohamed',
-               'lastname'     => 'alaa eldin',
-               'password'     => bcrypt('666666'),
-               'phone'        => '01096901954',
-               'email'        => 'alaa_dragneel@yahoo.com',
-
-
-          ],
-
-          [
-               'id'           => 2,
-               'username'     => 'zayed',
+               'username'     => 'mohamedphp',
                'firstname'    => 'mohamed',
                'lastname'     => 'zayed',
-               'password'     => bcrypt('666666'),
-               'phone'        => '012213549852',
-               'email'        => 'mohamed_zayed709@yahoo.com',
-
-
+               'password'     => bcrypt('123123'),
+               'phone'        => '01096901954',
+               'email'        => 'alaa_dragneel@yahoo.com',
+               'age'          => 22,
+               'gender'       => 0,
+               'hashedcode'   => '#1maza123',
+               'jop_id'       => 1,
+               'isadmin'      => 1,
           ],
-
          [
-               'id'           => 3,
-               'username'     => 'sasuke_alaa',
-               'firstname'    => 'moa',
+               'id'           => 2,
+               'username'     => 'alaa',
+               'firstname'    => 'mohamed',
                'lastname'     => 'alaa',
-               'password'     => bcrypt('666666'),
-               'phone'        => '011969019154',
-               'email'        => 'moaalaa16@yahoo.com',
-               
-
+               'password'     => bcrypt('123123'),
+               'phone'        => '01127946754',
+               'email'        => 'mohamedzayed709@yahoo.com',
+               'age'          => 22,
+               'gender'       => 0,
+               'hashedcode'   => '#2maal123',
+               'jop_id'       => 2,
+               'isadmin'      => 0,
           ],
        ];
        DB::table('users')->insert($Users);

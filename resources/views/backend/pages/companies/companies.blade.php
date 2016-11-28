@@ -33,6 +33,7 @@
                         <th>email</th>
                         <th>business_type</th>
                         <th>website</th>
+                        <th>Phones</th>
                         <th>hashedcode</th>
                         <th>founder_date</th>
                         <th>Actions</th>
@@ -43,9 +44,10 @@
                                 <td>{{$company->id}}</td>
                                 <td>{{$company->company_name}}</td>
                                 <td>{{$company->address}}</td>
-                                <td>{{$company->email}}</td>
+                                <td>{{$company->username}}</td>
                                 <td>{{$company->business_type}}</td>
                                 <td><a href="{{$company->website}}" class="btn-sm btn-primary">Website</a></td>
+                                <td>{{$company->phones}}</td>
                                 <td class="btn-link">{{$company->hashedcode}}</td>
                                 <td>{{$company->founder_date}}</td>
                                 <td>

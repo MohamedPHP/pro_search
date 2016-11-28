@@ -103,7 +103,23 @@
                             </div>
 
                         </div>
-                        {{-- End founder_date --}}
+                        {{-- End website --}}
+                        {{-- Start phones --}}
+                        <div class="form-group{{ $errors->has('phones') ? ' has-error' : '' }}">
+                            <label for="phones" class="col-md-4 control-label">phones</label>
+
+                            <div class="col-md-6">
+                                <input id="phones" type="text" class="form-control" name="phones" value="{{ old('phones') }}">
+                                <strong class="help-block" style="color:#f00;">Add " - " Between Each Phone</strong>
+                                @if ($errors->has('phones'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('phones') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                        </div>
+                        {{-- End phones --}}
                         {{-- Start Password --}}
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>

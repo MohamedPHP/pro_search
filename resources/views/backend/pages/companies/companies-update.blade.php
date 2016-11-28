@@ -70,10 +70,10 @@
                     {{-- Start email --}}
                     <div class="row text-center">
                         <div class="col-md-4">
-                            <h5 for="email">email</h5>
+                            <h5 for="username">email</h5>
                         </div>
                         <div class="col-md-4">
-                            <input type="email" class="form-control input" id="email" name="email" value="{{ $company->email }}" required autocomplete="off">
+                            <input type="email" class="form-control input" id="username" name="username" value="{{ $company->username }}" required autocomplete="off">
                         </div>
                     </div>
                     {{-- End email --}}
@@ -102,6 +102,17 @@
                         </div>
                     </div>
                     {{-- End website --}}
+                    {{-- Start phones --}}
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            <h5 for="phones">phones</h5>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control input" id="phones" name="phones" value="{{ $company->phones }}" required autocomplete="off">
+                            <strong class="help-block" style="color:#f00;">Add " - " Between Each Phone</strong>
+                        </div>
+                    </div>
+                    {{-- End phones --}}
                     {{-- Start password --}}
                     <div class="row text-center">
                         <div class="col-md-4">

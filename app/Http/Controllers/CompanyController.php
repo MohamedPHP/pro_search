@@ -26,18 +26,20 @@ class CompanyController extends Controller
         $this->validate($request, [
             'company_name'  =>  'required|min:4|unique:companies',
             'address'       =>  'required',
-            'email'         =>  'required|email',
+            'username'         =>  'required|email',
             'business_type' =>  'required',
             'website'       =>  'required|url',
+            'phones'        =>  'required',
             'password'      =>  'required|confirmed|min:6',
             'founder_date'  =>  'required',
         ]);
         $company = new Company();
         $company->company_name  = $request['company_name'];
         $company->address       = $request['address'];
-        $company->email         = $request['email'];
+        $company->username         = $request['username'];
         $company->business_type = $request['business_type'];
         $company->website       = $request['website'];
+        $company->phones       = $request['phones'];
         $company->password      = bcrypt($request['password']);
         $company->founder_date  = $request['founder_date'];
         $company->save();
@@ -62,18 +64,20 @@ class CompanyController extends Controller
         $this->validate($request, [
             'company_name'  =>  'required|min:4',
             'address'       =>  'required',
-            'email'         =>  'required|email',
+            'username'         =>  'required|email',
             'business_type' =>  'required',
             'website'       =>  'required|url',
+            'phones'        =>  'required',
             'password'      =>  'required|min:6',
             'founder_date'  =>  'required',
         ]);
         $company = Company::find($id);
         $company->company_name  = $request['company_name'];
         $company->address       = $request['address'];
-        $company->email         = $request['email'];
+        $company->username      = $request['username'];
         $company->business_type = $request['business_type'];
         $company->website       = $request['website'];
+        $company->phones        = $request['phones'];
         if ($request['password'] !== $company->password) {
             $company->password = bcrypt($request['password']);
         }
@@ -127,5 +131,5 @@ class CompanyController extends Controller
 
 
     }
-    
+
 }

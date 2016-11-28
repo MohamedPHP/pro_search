@@ -24,7 +24,7 @@ class SearchController extends Controller
 		$searchWord = $request['search'];
 		//get the fillter value
 		$searchType = $request['fillter'];
-          // persone define
+          // person define
 	    if ($request->searchType == 0) {
               if ($searchType == 'name') {
                    // get the matched data
@@ -65,7 +65,7 @@ class SearchController extends Controller
                   ->get();
              }elseif($searchType == 'email') {
                    // get the matched data
-          	    $searchResultsCompany = Company::where('email', 'like', "$searchWord%")->orderBy('company_name', 'ASC')->get();
+          	    $searchResultsCompany = Company::where('username', 'like', "$searchWord%")->orderBy('company_name', 'ASC')->get();
               }
 
               // return the data
@@ -131,7 +131,7 @@ class SearchController extends Controller
                 	    ->orderBy('company_name', 'ASC')->get();
                     }elseif($searchType == 'email') {
                          // get the matched data
-                	    $searchResultsCompany = Company::where('email', 'like', "$searchWord%")->orderBy('company_name', 'ASC')->get();
+                	    $searchResultsCompany = Company::where('username', 'like', "$searchWord%")->orderBy('company_name', 'ASC')->get();
                     }elseif($searchType == 'Job'){
                       // join to get the users that related to the job by advanced join
                      $searchResultsCompany = BussnessType::join('companies', function($j) use($searchWord) {
@@ -147,7 +147,7 @@ class SearchController extends Controller
             '
             <div class="userInfo">
             <h4 class="fullName"><i class="fa fa-user"></i> '. $results->company_name .'</h4>';
-            $AjaxResult .='<h4 class="email"><i class="fa fa-envelope"></i> '. $results->email .'</h4>
+            $AjaxResult .='<h4 class="email"><i class="fa fa-envelope"></i> '. $results->username .'</h4>
             ';
             $AjaxResult .=' <h4 class="num"><i class="fa fa-briefcase"></i> '.\App\BussnessType::where('id', $results->business_type)->first()->bussness_type .'</h4>';
             $AjaxResult .= '</div>';

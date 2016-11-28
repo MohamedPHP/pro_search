@@ -15,9 +15,11 @@ class JopsTableSeeder extends Seeder
          DB::table('jops')->truncate();
 
          $jops = [
-           ['id' => 1, 'content' => 'web development','user_id' => rand(1, 3) ],
-           ['id' => 2, 'content' => 'web desgine','user_id' => rand(1, 3) ],
-           ['id' => 3, 'content' => 'seo', 'user_id' => rand(1, 3) ],
+           ['id' => 1, 'content' => 'web development'],
+           ['id' => 2, 'content' => 'web desgine'],
+           ['id' => 3, 'content' => 'seo'],
+           ['id' => 4, 'content' => 'Marketing'],
+           ['id' => 5, 'content' => 'CEO'],
          ];
          DB::table('jops')->insert($jops);
     }

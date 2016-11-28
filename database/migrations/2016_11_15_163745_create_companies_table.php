@@ -17,9 +17,10 @@ class CreateCompaniesTable extends Migration
             $table->increments('id');
             $table->string('company_name');
             $table->string('address');
-            $table->string('email')->unique();
+            $table->string('username')->unique();
             $table->integer('business_type')->unsigned();
             $table->foreign('business_type')->references('id')->on('bussness_types')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('phones')->nullable();
             $table->string('website');
             $table->string('hashedcode');
             $table->string('password');

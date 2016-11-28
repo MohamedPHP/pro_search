@@ -50,9 +50,22 @@ class APIController extends Controller
         $user->email     = $request['email'];
         $user->age       = $request['age'];
         $user->gender    = $request['gender'];
-        $user->jop_id    = $request['jop_title'];
+        $user->jop_id    = $request['job_title'];
 
         $user->save();
+
+
+        $fristname = str_split($user->firstname, 2);
+        $lastname = str_split($user->lastname, 2);
+
+
+        $hashcode = '#' . $user->id . $fristname[0] . $lastname[0] . rand(0, 1000);
+
+
+        $user2 = User::find($user->id);
+        $user2->hashedcode = $hashcode;
+        $user2->save();
+
 
     	if(!$user){
     		return Response::json(['response' => "Error Saving The User!"], 400);

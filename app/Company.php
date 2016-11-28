@@ -26,6 +26,7 @@ class Company extends Authenticatable
         'business_type',
         'website',
         'password',
+        'phones',
         'founder_date',
     ];
 
