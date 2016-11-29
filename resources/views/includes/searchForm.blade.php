@@ -16,9 +16,9 @@
         <option value="Job"><a href="#">Job</a></option>
       </select>
     </div><!-- /btn-group -->
-    <div class="form-group">
+    <div class="form-group" style="width: 242px;">
       <label class="sr-only" for="search">Email address</label>
-      <input type="text" class="form-control searchBox transparent" name="search" placeholder="Search ..." id="search" required autocomplete="off">
+      <input type="text" style="width:100%" class="form-control searchBox transparent" name="search" placeholder="Search ..." id="search" required autocomplete="off">
     </div>
     <span class="input-group-btn">
       <button class="btn btn-info btn-fill" type="submit" id="submit"><span class="glyphicon glyphicon-search"></span></button>

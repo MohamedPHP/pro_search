@@ -13,6 +13,7 @@ class CreateJopsTable extends Migration
     public function up()
     {
         Schema::create('jops', function (Blueprint $table) {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0'); // to avoid errors during rollback
             $table->increments('id');
             $table->string('content');
             $table->timestamp('created_at')->useCurrent();

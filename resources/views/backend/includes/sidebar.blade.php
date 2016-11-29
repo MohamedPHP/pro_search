@@ -6,7 +6,7 @@
     -->
 
     <div class="logo">
-        <a href="#" class="simple-text">
+        <a href="{{ url('admin/dashboard') }}" class="simple-text">
             Dezique
         </a>
     </div>
@@ -67,6 +67,20 @@
                 <a href="{{ route('bussnesstypes-get-create') }}">
                     <i class="material-icons">schedule</i>
                     <p>BussnessTypes-Create</p>
+                </a>
+            </li>
+
+
+            <li class="{{ $pagename == 'CompaniesData' ? 'active' : '' }}">
+                <a href="{{ route('companiesdata.index') }}">
+                    <i class="material-icons">schedule</i>
+                    <p>CompaniesData</p>
+                </a>
+            </li>
+            <li class="{{ $pagename == 'CompaniesData-Create' ? 'active' : '' }}">
+                <a href="{{ route('companiesdata-get-create') }}">
+                    <i class="material-icons">schedule</i>
+                    <p>CompaniesData-Create</p>
                 </a>
             </li>
         </ul>

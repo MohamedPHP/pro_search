@@ -45,7 +45,10 @@
                                 <td>{{$company->company_name}}</td>
                                 <td>{{$company->address}}</td>
                                 <td>{{$company->username}}</td>
-                                <td>{{$company->business_type}}</td>
+                                @php
+                                    $b = App\BussnessType::find($company->business_type)->first();
+                                @endphp
+                                <td>{{ $b->bussness_type }}</td>
                                 <td><a href="{{$company->website}}" class="btn-sm btn-primary">Website</a></td>
                                 <td>{{$company->phones}}</td>
                                 <td class="btn-link">{{$company->hashedcode}}</td>

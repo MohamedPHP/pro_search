@@ -192,6 +192,32 @@ Route::group(['middleware' => 'auth'], function (){
             'as'   => 'bussnesstypes.delete'
         ]);
         // End bussnesstypes
+        // Start companiesdata
+        Route::get('/companiesdata', [
+            'uses' => 'Companies_DataController@index',
+            'as'   => 'companiesdata.index'
+        ]);
+        Route::get('/companiesdata/create', [
+            'uses' => 'Companies_DataController@getcreate',
+            'as'   => 'companiesdata-get-create'
+        ]);
+        Route::post('/companiesdata/create', [
+            'uses' => 'Companies_DataController@create',
+            'as'   => 'companiesdata.create'
+        ]);
+        Route::get('/companiesdata/update/{id}', [
+            'uses' => 'Companies_DataController@viewUpdate',
+            'as'   => 'companiesdata-get-update'
+        ]);
+        Route::post('/companiesdata/update/post/{id}', [
+            'uses' => 'Companies_DataController@update',
+            'as'   => 'companiesdata.update'
+        ]);
+        Route::get('/companiesdata/delete/{id}', [
+            'uses' => 'Companies_DataController@delete',
+            'as'   => 'companiesdata.delete'
+        ]);
+        // End companiesdata
     });
 });
 /*End Admin*/
@@ -212,8 +238,6 @@ Route::group(['prefix'=>'api'], function(){
 /*End User Web Survice*/
 
 
-
-
 /*Start Company Web Survice*/
 Route::group(['prefix'=>'api'], function(){
 
@@ -227,6 +251,26 @@ Route::group(['prefix'=>'api'], function(){
 
 		Route::post('update/{id}', 'APICompanyController@updateCompany');
 	});
-    
+
 });
 /*End Company Web Survice*/
+
+
+/*Start BussnessType Web Survice*/
+Route::group(['prefix'=>'api'], function(){
+	Route::group(['prefix'=>'bt'],function(){
+		Route::get('get',['uses'=>'APIJopAndBTController@allBts']);
+		Route::get('get/{id}',['uses'=>'APIJopAndBTController@getBt']);
+	});
+});
+/*End BussnessType Web Survice*/
+
+
+/*Start Jop Web Survice*/
+Route::group(['prefix'=>'api'], function(){
+	Route::group(['prefix'=>'jop'],function(){
+		Route::get('get',['uses'=>'APIJopAndBTController@allJops']);
+		Route::get('get/{id}',['uses'=>'APIJopAndBTController@getJop']);
+	});
+});
+/*End Jop Web Survice*/

@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class BussnessType extends Model
 {
-    public function company()
+    public function companies()
     {
-        $this->belongsTo('App\Company');
+        $this->hasMany('App\Company');
+    }
+    public function companiesData()
+    {
+        $this->hasMany('App\CompanyData');
     }
 }

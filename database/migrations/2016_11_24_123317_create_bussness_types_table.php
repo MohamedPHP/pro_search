@@ -13,6 +13,7 @@ class CreateBussnessTypesTable extends Migration
     public function up()
     {
         Schema::create('bussness_types', function (Blueprint $table) {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0'); // to avoid error during migration
             $table->increments('id');
             $table->string('bussness_type');
             $table->timestamp('created_at')->useCurrent();

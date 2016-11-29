@@ -47,6 +47,13 @@ class APICompanyController extends Controller
         $company->password      = $request['password'];
         $company->founder_date  = $request['founder_date'];
         $company->save();
+
+        $company_name = str_split($company->company_name, 3);
+        $hashcode = '@' . $company->id . $company_name[0] . rand(0, 1000);
+        $company2 = Company::find($company->id);
+        $company2->hashedcode = $hashcode;
+        $company2->save();
+
     	if(!$company){
     		return Response::json(['response' => "Error Updating The Comapny!"], 400);
     	}

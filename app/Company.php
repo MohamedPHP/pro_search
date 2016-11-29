@@ -7,9 +7,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Company extends Authenticatable
 {
 
-    public function bussness_types()
+    public function bussniessType()
     {
-        return $this->hasOne('App\BussnessType');
+        return $this->belongsTo('App\BussnessType');
     }
 
     protected $table = 'companies';
