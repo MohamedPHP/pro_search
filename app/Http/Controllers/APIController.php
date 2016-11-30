@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 use Response;
+use App\Jop;
 
 class APIController extends Controller
 {
@@ -50,7 +51,15 @@ class APIController extends Controller
         $user->email     = $request['email'];
         $user->age       = $request['age'];
         $user->gender    = $request['gender'];
-        $user->jop_id    = $request['job_title'];
+        if (count(Jop::where('content', $request['job_title'])) == 0) {
+            $jop = new Jop();
+            $jop->content = $request['job_title'];
+            $jop->save();
+            $user->jop_id = $jop->id;
+        }elseif (count(Jop::where('content', $request['job_title'])) > 0) {
+            $jop = Jop::where('content', $request['job_title'])->get();
+            $user->jop_id = $jop->id;
+        }
 
         $user->save();
 
@@ -78,6 +87,18 @@ class APIController extends Controller
     public function updateUser(Request $request, $id)
     {
     	$user =  $this->user->find($id);
+
+        $user->username  = $request['username'];
+        $user->firstname = $request['firstname'];
+        $user->lastname  = $request['lastname'];
+        $user->password  = bcrypt($request['password']);
+        $user->phone     = $request['phone_no'];
+        $user->email     = $request['email'];
+        $user->age       = $request['age'];
+        $user->gender    = $request['gender'];
+        $user->jop_id    = $request['job_title'];
+
+        $user->save();
 
     	if(!$user){
     		return Response::json(['response' => "Error Updating The User!"], 400);

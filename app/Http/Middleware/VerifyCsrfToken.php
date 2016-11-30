@@ -20,5 +20,7 @@ class VerifyCsrfToken extends BaseVerifier
          'api/bt/*',
          'api/jop',
          'api/jop/*',
+         'api/company/data',
+         'api/company/data/*',
      ];
 }

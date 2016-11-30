@@ -250,27 +250,54 @@ Route::group(['prefix'=>'api'], function(){
 		Route::post('save', 'APICompanyController@saveCompany');
 
 		Route::post('update/{id}', 'APICompanyController@updateCompany');
+
 	});
 
 });
 /*End Company Web Survice*/
 
 
+
+/*Start CompanyData Web Survice*/
+Route::group(['prefix'=>'api'], function(){
+
+    Route::group(['prefix'=>'company/data'],function(){
+
+        Route::get('/get', 'APICompanyController@getCompanyData');
+
+    });
+
+});
+/*End CompanyData Web Survice*/
+
+
+
 /*Start BussnessType Web Survice*/
 Route::group(['prefix'=>'api'], function(){
+
 	Route::group(['prefix'=>'bt'],function(){
+
 		Route::get('get',['uses'=>'APIJopAndBTController@allBts']);
+
 		Route::get('get/{id}',['uses'=>'APIJopAndBTController@getBt']);
+
 	});
+
 });
 /*End BussnessType Web Survice*/
 
 
+
 /*Start Jop Web Survice*/
 Route::group(['prefix'=>'api'], function(){
+
 	Route::group(['prefix'=>'jop'],function(){
+
 		Route::get('get',['uses'=>'APIJopAndBTController@allJops']);
+
 		Route::get('get/{id}',['uses'=>'APIJopAndBTController@getJop']);
+
 	});
+
 });
 /*End Jop Web Survice*/
