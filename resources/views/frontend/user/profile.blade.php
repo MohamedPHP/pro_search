@@ -23,7 +23,7 @@
 			<div class="profile-sidebar">
 				<!-- SIDEBAR USERPIC -->
 				<div class="profile-userpic">
-					<img src="http://placehold.it/100/100" class="img-responsive" alt="">
+					<img src="{{ asset(Auth::user()->image) }}" class="img-responsive" style="width:100px;height:100px">
 				</div>
 				<!-- END SIDEBAR USERPIC -->
 				<!-- SIDEBAR USER TITLE -->

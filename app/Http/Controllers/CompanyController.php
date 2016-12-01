@@ -44,9 +44,8 @@ class CompanyController extends Controller
         $company->founder_date  = $request['founder_date'];
         $company->save();
 
-        $hashcode = '#' . $company->id . $company->company_name . rand(0, 1000);
-
-
+        $company_name = str_split($company->company_name, 3);
+        $hashcode = '@' . $company->id . $company_name[0] . rand(0, 1000);
         $company2 = Company::find($company->id);
         $company2->hashedcode = $hashcode;
         $company2->save();

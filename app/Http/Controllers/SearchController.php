@@ -10,11 +10,12 @@ use App\User;
 use App\Company;
 use App\BussnessType;
 use App\Jop;
+use Response;
 class SearchController extends Controller
 {
     public function search(Request $request)
     {
-	    $searchResults = '';
+	     $searchResults = '';
          $searchResultsCompany = '';
 
 	    $this->validate($request, [
@@ -156,4 +157,58 @@ class SearchController extends Controller
                return response()->json(['results' => $AjaxResult], 200);
 		}
 	}
+
+    public function getResult(Request $request)
+    {
+        // search_about **
+        // search_by **
+        // search_word **
+        $searchWord = $request['search_word'];
+        if ($request['search_about'] == 'person') {
+            if ($request['search_by'] == 'name') {
+                $searchResults = User::select("id","username","firstname","lastname","phone","email","age","gender","hashedcode","jop_id")->where(function($q) use ($searchWord) {
+                        $q->where("firstname" , 'like', "%$searchWord%"); // search by firstname
+                        $q->orWhere("lastname" , 'like', "%$searchWord%"); // search by lastname
+                        $q->orWhere("username" , 'like', "%$searchWord%"); // search by username
+                   })
+          	    ->orderBy('firstname', 'ASC')->get();
+            } elseif($request['search_by'] == 'Job'){
+                $searchResults = Jop::join('users', function($j) use($searchWord) {
+                     $j->on('users.jop_id', '=', 'jops.id')
+                     ->where('jops.content', 'like', "%$searchWord%");
+                })->select("users.id","username","firstname","lastname","phone","email","age","gender","hashedcode","jop_id")
+                ->get();
+            } elseif($request['search_by'] == 'email'){
+                $searchResults = User::select("id","username","firstname","lastname","phone","email","age","gender","hashedcode","jop_id")->
+                where("email" , 'like', "$searchWord%")
+                ->orderBy('firstname', 'ASC')->get();
+            } elseif($request['search_by'] == 'phone'){
+                $searchResults = User::select("id","username","firstname","lastname","phone","email","age","gender","hashedcode","jop_id")
+                ->where("phone" , 'like', "$searchWord%")
+                ->orderBy('firstname', 'ASC')->get();
+            }
+            return Response::json(['result' => $searchResults], 200);
+        }
+
+        if ($request['search_about'] == 'company') {
+
+            if ($request['search_by'] == 'name') {
+                $searchResultsCompany = Company::where('company_name', 'like', "%$searchWord%")
+          	    ->orderBy('company_name', 'ASC')->get();
+            } elseif($request['search_by'] == 'bussness'){
+                $searchResultsCompany = BussnessType::join('companies', function($j) use($searchWord) {
+                     $j->on('companies.business_type', '=', 'bussness_types.id')
+                     ->where('bussness_types.bussness_type', 'like', "%$searchWord%");
+                })
+                ->orderBy('company_name', 'ASC')
+                ->get();
+            } elseif($request['search_by'] == 'email'){
+                $searchResultsCompany = Company::where('username', 'like', "%$searchWord%")
+                ->orderBy('company_name', 'ASC')
+                ->get();
+            }
+            return Response::json(['result' => $searchResultsCompany],200);
+
+        }
+    }
 }

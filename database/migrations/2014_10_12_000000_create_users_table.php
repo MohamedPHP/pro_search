@@ -23,11 +23,12 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('age');
             $table->string('gender');
+            $table->string('image');
             $table->string('hashedcode');
             $table->integer('jop_id')->unsigned();
             $table->foreign('jop_id')->references('id')->on('jops')->onDelete('cascade')->onUpdate('cascade');
             $table->rememberToken();
-            $table->integer('isadmin')->defualt(0);
+            $table->integer('isadmin')->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

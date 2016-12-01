@@ -11,6 +11,7 @@ use App\Company;
 use Response;
 use App\CompanyData;
 use BussnessType;
+use Auth;
 
 class APICompanyController extends Controller
 {
@@ -24,6 +25,15 @@ class APICompanyController extends Controller
 
         return Response::json(['result' => $this->company->all()],200);
 
+    }
+
+    public function loginCompany(Request $request)
+    {
+        if (count(Company::where('hashedcode', $request['hashedcode'])->first()) > 0) {
+            return Response::json(['response' => "Found"], 200);
+        }else {
+            return Response::json(['response' => "Not Found"], 400);
+        }
     }
 
 
@@ -71,7 +81,6 @@ class APICompanyController extends Controller
     	return Response::json(['response' => "Saved Successfully!"], 200);
     }
 
-
     public function updateCompany(Request $request, $id)
     {
         $company =  $this->company->find($id);
@@ -98,6 +107,29 @@ class APICompanyController extends Controller
     		return Response::json(['response' => "Not Found!"], 400);
     	}
     	return Response::json(['result' => $company_data],200);
+    }
+
+
+    public function saveBase64ToImage($image) {
+        $path = base_path('');
+        //$base = $_REQUEST['image'];
+        $base = $image;
+        $binary = base64_decode($base);
+        //$binary = base64_decode(urldecode($base));
+        header('Content-Type: bitmap; charset=utf-8');
+
+        $f = finfo_open();
+        $mime_type = finfo_buffer($f, $binary, FILEINFO_MIME_TYPE);
+        $mime_type = str_ireplace('image/', '', $mime_type);
+
+        $filename = md5(\Carbon\Carbon::now()) . '.' . $mime_type;
+        $file = fopen($path . $filename, 'wb');
+        if (fwrite($file, $binary)) {
+            return $filename;
+        } else {
+            return FALSE;
+        }
+        fclose($file);
     }
 
 }

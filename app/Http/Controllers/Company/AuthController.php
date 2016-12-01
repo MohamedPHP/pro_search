@@ -92,10 +92,9 @@ class AuthController extends Controller
             'founder_date'  => $data['founder_date'],
         ]);
 
-        $hashcode = '@' . $company . $data['company_name'] . rand(0, 1000);
-
-
-        $company2 = Company::find($company);
+        $company_name = str_split($data['company_name'], 3);
+        $hashcode = '@' . $company . $company_name[0] . rand(0, 1000);
+        $company2 = Company::find($company->id);
         $company2->hashedcode = $hashcode;
         $company2->save();
 

@@ -301,3 +301,31 @@ Route::group(['prefix'=>'api'], function(){
 
 });
 /*End Jop Web Survice*/
+
+
+/*Start search Web Survice*/
+Route::group(['prefix'=>'api'], function(){
+
+	Route::group(['prefix'=>'search'],function(){
+
+		Route::get('results',['uses'=> 'SearchController@getResult']);
+
+	});
+
+});
+/*End search Web Survice*/
+
+
+/*Start search Web Survice*/
+Route::group(['prefix'=>'api'], function(){
+
+	Route::group(['prefix'=>'login'],function(){
+
+		Route::post('company',['uses'=> 'APICompanyController@loginCompany']);
+
+        Route::post('user',['uses'=> 'APIController@loginUser']);
+
+	});
+
+});
+/*End search Web Survice*/

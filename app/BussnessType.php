@@ -12,6 +12,6 @@ class BussnessType extends Model
     }
     public function companiesData()
     {
-        $this->hasMany('App\CompanyData');
+        return $this->hasMany('App\CompanyData');
     }
 }

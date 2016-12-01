@@ -24,6 +24,7 @@ class CreateCompaniesTable extends Migration
             $table->string('website');
             $table->string('hashedcode');
             $table->string('password');
+            $table->string('image');
             $table->string('founder_date');
             $table->rememberToken();
             $table->timestamp('created_at')->useCurrent();

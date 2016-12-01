@@ -13,7 +13,6 @@ use App\Company;
 class UserController extends Controller
 {
     // `id`, `username`, `fristname`, `lastname`, `password`, `phone`, `email`, `jop_id`, `age`, `gender`, `hashedcode`,
-
     public function dashboard()
     {
         $users = User::where('isadmin', 0)->get();
@@ -62,7 +61,7 @@ class UserController extends Controller
         $lastname = str_split($user->lastname, 2);
 
 
-        $hashcode = '#' . $user->id . $fristname[0] . $lastname[0] . rand(0, 1000);
+        $hashcode = '$' . $user->id . $fristname[0] . $lastname[0] . rand(0, 1000);
 
 
         $user2 = User::find($user->id);
