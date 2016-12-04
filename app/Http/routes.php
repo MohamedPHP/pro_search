@@ -316,16 +316,16 @@ Route::group(['prefix'=>'api'], function(){
 /*End search Web Survice*/
 
 
-/*Start search Web Survice*/
+/*Start login Web Survice*/
 Route::group(['prefix'=>'api'], function(){
 
 	Route::group(['prefix'=>'login'],function(){
 
 		Route::post('company',['uses'=> 'APICompanyController@loginCompany']);
 
-        Route::post('user',['uses'=> 'APIController@loginUser']);
+        Route::post('person',['uses'=> 'APIController@loginUser']);
 
 	});
 
 });
-/*End search Web Survice*/
+/*End login Web Survice*/
