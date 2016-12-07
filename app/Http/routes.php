@@ -308,7 +308,7 @@ Route::group(['prefix'=>'api'], function(){
 
 	Route::group(['prefix'=>'search'],function(){
 
-		Route::get('results',['uses'=> 'SearchController@getResult']);
+		Route::post('results',['uses'=> 'SearchController@getResult']);
 
 	});
 

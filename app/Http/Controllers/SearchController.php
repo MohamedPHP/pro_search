@@ -176,14 +176,14 @@ class SearchController extends Controller
                 $searchResults = Jop::join('users', function($j) use($searchWord) {
                      $j->on('users.jop_id', '=', 'jops.id')
                      ->where('jops.content', 'like', "%$searchWord%");
-                })->select("users.id","username","firstname","lastname","phone","email","age","gender","hashedcode","jop_id")
+                })->select("users.id","username","firstname","lastname","phone","email","age","gender","jop_id")
                 ->get();
             } elseif($request['search_by'] == 'email'){
-                $searchResults = User::select("id","username","firstname","lastname","phone","email","age","gender","hashedcode","jop_id")->
+                $searchResults = User::select("id","username","firstname","lastname","phone","email","age","gender","jop_id")->
                 where("email" , 'like', "$searchWord%")
                 ->orderBy('firstname', 'ASC')->get();
             } elseif($request['search_by'] == 'phone'){
-                $searchResults = User::select("id","username","firstname","lastname","phone","email","age","gender","hashedcode","jop_id")
+                $searchResults = User::select("id","username","firstname","lastname","phone","email","age","gender","jop_id")
                 ->where("phone" , 'like', "$searchWord%")
                 ->orderBy('firstname', 'ASC')->get();
             }

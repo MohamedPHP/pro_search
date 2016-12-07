@@ -108,28 +108,4 @@ class APICompanyController extends Controller
     	}
     	return Response::json(['result' => $company_data],200);
     }
-
-
-    public function saveBase64ToImage($image) {
-        $path = base_path('');
-        //$base = $_REQUEST['image'];
-        $base = $image;
-        $binary = base64_decode($base);
-        //$binary = base64_decode(urldecode($base));
-        header('Content-Type: bitmap; charset=utf-8');
-
-        $f = finfo_open();
-        $mime_type = finfo_buffer($f, $binary, FILEINFO_MIME_TYPE);
-        $mime_type = str_ireplace('image/', '', $mime_type);
-
-        $filename = md5(\Carbon\Carbon::now()) . '.' . $mime_type;
-        $file = fopen($path . $filename, 'wb');
-        if (fwrite($file, $binary)) {
-            return $filename;
-        } else {
-            return FALSE;
-        }
-        fclose($file);
-    }
-
 }

@@ -124,7 +124,4 @@ class APIController extends Controller
     	return Response::json(['response' => "Updated Successfully!"], 200);
 
     }
-
-
-
 }
