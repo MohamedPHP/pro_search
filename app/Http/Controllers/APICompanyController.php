@@ -17,7 +17,7 @@ class APICompanyController extends Controller
 {
     public function __construct(Company $company){
 
-    	$this->company = $company;
+        $this->company = $company;
     }
 
     public function allCompanies()
@@ -39,11 +39,11 @@ class APICompanyController extends Controller
 
     public function getCompany($id)
     {
-    	$company = $this->company->find($id);
-    	if(!$company){
-    		return Response::json(['response' => "Not Found!"], 400);
-    	}
-    	return Response::json(['result' => $company],200);
+        $company = $this->company->find($id);
+        if(!$company){
+            return Response::json(['response' => "Not Found!"], 400);
+        }
+        return Response::json(['result' => $company],200);
     }
 
 
@@ -75,10 +75,10 @@ class APICompanyController extends Controller
         $company2->hashedcode = $hashcode;
         $company2->save();
 
-    	if(!$company){
-    		return Response::json(['response' => "Error Saveing The Comapny!"], 400);
-    	}
-    	return Response::json(['response' => "Saved Successfully!"], 200);
+        if(!$company){
+            return Response::json(['response' => "Error Saveing The Comapny!"], 400);
+        }
+        return Response::json(['response' => "Saved Successfully!"], 200);
     }
 
     public function updateCompany(Request $request, $id)
@@ -94,18 +94,18 @@ class APICompanyController extends Controller
         $company->founder_date  = $request['founder_date'];
         $company->save();
 
-    	if(!$company){
-    		return Response::json(['response' => "Error Updating The Comapny!"], 400);
-    	}
-    	return Response::json(['response' => "Updated Successfully!"], 200);
+        if(!$company){
+            return Response::json(['response' => "Error Updating The Comapny!"], 400);
+        }
+        return Response::json(['response' => "Updated Successfully!"], 200);
     }
 
     public function getCompanyData()
     {
         $company_data = CompanyData::all();
         if(!$company_data){
-    		return Response::json(['response' => "Not Found!"], 400);
-    	}
-    	return Response::json(['result' => $company_data],200);
+            return Response::json(['response' => "Not Found!"], 400);
+        }
+        return Response::json(['result' => $company_data],200);
     }
 }

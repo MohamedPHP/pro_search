@@ -31,63 +31,63 @@ class AuthController extends Controller
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
-     * Where to redirect users after login / registration.
-     *
-     * @var string
-     */
+    * Where to redirect users after login / registration.
+    *
+    * @var string
+    */
     protected $redirectTo = '/';
 
     /**
-     * Create a new authentication controller instance.
-     *
-     * @return void
-     */
+    * Create a new authentication controller instance.
+    *
+    * @return void
+    */
     public function __construct()
     {
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
+    * Get a validator for an incoming registration request.
+    *
+    * @param  array  $data
+    * @return \Illuminate\Contracts\Validation\Validator
+    */
     protected function validator(array $data)
     {
         // `id`, `username`, `fristname`, `lastname`, `password`, `phone`, `email`, `jop_id`, `age`, `gender`, `hashedcode`,
 
         return Validator::make($data, [
-            'username'  => 'required|unique:users|alpha',
-            'fristname' => 'required',
-            'lastname'  => 'required',
-            'password'  => 'required|min:6|confirmed',
-            'phone'     => 'required|unique:users',
-            'email'     => 'required|unique:users',
-            'jop_id'    => 'required',
-            'gender'    => 'required',
-            'age'       => 'required|numeric',
+        'username'  => 'required|unique:users|alpha',
+        'fristname' => 'required',
+        'lastname'  => 'required',
+        'password'  => 'required|min:6|confirmed',
+        'phone'     => 'required|unique:users',
+        'email'     => 'required|unique:users',
+        'jop_id'    => 'required',
+        'gender'    => 'required',
+        'age'       => 'required|numeric',
         ]);
     }
 
     /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
-     */
+    * Create a new user instance after a valid registration.
+    *
+    * @param  array  $data
+    * @return User
+    */
     protected function create(array $data)
     {
         $user =  User::insertGetId([
-            'username'  => $data['username'],
-            'firstname' => $data['fristname'],
-            'lastname'  => $data['lastname'],
-            'password'  => bcrypt($data['password']),
-            'phone'     => $data['phone'],
-            'email'     => $data['email'],
-            'jop_id'    => $data['jop_id'],
-            'gender'    => $data['gender'],
-            'age'       => $data['age'],
+        'username'  => $data['username'],
+        'firstname' => $data['fristname'],
+        'lastname'  => $data['lastname'],
+        'password'  => bcrypt($data['password']),
+        'phone'     => $data['phone'],
+        'email'     => $data['email'],
+        'jop_id'    => $data['jop_id'],
+        'gender'    => $data['gender'],
+        'age'       => $data['age'],
         ]);
 
         $fristname = str_split($data['fristname'], 2);

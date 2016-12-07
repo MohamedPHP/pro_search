@@ -10,9 +10,9 @@ use App\Jop;
 class HomeController extends Controller
 {
 
-  public function index()
-  {
-    $jobs = Jop::all();
-    return view('index', compact('jobs'));
-  }
+    public function index()
+    {
+        $jobs = Jop::all();
+        return view('index', compact('jobs'));
+    }
 }

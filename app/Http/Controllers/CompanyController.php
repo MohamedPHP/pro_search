@@ -61,14 +61,14 @@ class CompanyController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'company_name'  =>  'required|min:4',
-            'address'       =>  'required',
-            'username'         =>  'required|email',
-            'business_type' =>  'required',
-            'website'       =>  'required|url',
-            'phones'        =>  'required',
-            'password'      =>  'required|min:6',
-            'founder_date'  =>  'required',
+        'company_name'  =>  'required|min:4',
+        'address'       =>  'required',
+        'username'         =>  'required|email',
+        'business_type' =>  'required',
+        'website'       =>  'required|url',
+        'phones'        =>  'required',
+        'password'      =>  'required|min:6',
+        'founder_date'  =>  'required',
         ]);
         $company = Company::find($id);
         $company->company_name  = $request['company_name'];
@@ -108,13 +108,13 @@ class CompanyController extends Controller
         // `id`, `company_name`, `address`, `username`, `business_type`,
         // `website`, `hashedcode`, `password`, `founder_date`
         $this->validate($request, [
-            'company_name'  =>  'required',
-            'address'       =>  'required',
-            'username'      =>  'required|email',
-            'business_type' =>  'required',
-            'password'      =>  'required',
-            'website'       =>  'url',
-            'founder_date'  =>  'required|date',
+        'company_name'  =>  'required',
+        'address'       =>  'required',
+        'username'      =>  'required|email',
+        'business_type' =>  'required',
+        'password'      =>  'required',
+        'website'       =>  'url',
+        'founder_date'  =>  'required|date',
         ]);
         $company = Company::find($id);
         $company->company_name  = $request['company_name'];

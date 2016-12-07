@@ -19,7 +19,7 @@ class UserController extends Controller
         $companies = Company::all();
         return view('backend.pages.dashboard', compact('users', 'companies'));
     }
-
+    
     public function index()
     {
         $users = User::where('isadmin', 0)->get();
@@ -102,15 +102,15 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'Username'    => 'required',
-            'firstname'   => 'required',
-            'lastname'    => 'required',
-            'password'    => 'required',
-            'phone'       => 'required',
-            'email'       => 'required',
-            'age'         => 'required',
-            'gender'      => 'required',
-            'jop_id'      => 'required',
+        'Username'    => 'required',
+        'firstname'   => 'required',
+        'lastname'    => 'required',
+        'password'    => 'required',
+        'phone'       => 'required',
+        'email'       => 'required',
+        'age'         => 'required',
+        'gender'      => 'required',
+        'jop_id'      => 'required',
         ]);
         $user = User::find($id);
         $user->Username = $request['Username'];
@@ -120,6 +120,7 @@ class UserController extends Controller
             $user->password = bcrypt($request['password']);
         }
         $user->phone = $request['phone'];
+        $user->image = 'src/images/logo.png';
         $user->email = $request['email'];
         $user->age = $request['age'];
         $user->gender = $request['gender'];

@@ -15,8 +15,8 @@ class APIJopAndBTController extends Controller
 {
     public function __construct(BussnessType $bt, Jop $jop){
 
-    	$this->bt = $bt;
-    	$this->jop = $jop;
+        $this->bt = $bt;
+        $this->jop = $jop;
     }
 
     public function allBts()
@@ -28,11 +28,11 @@ class APIJopAndBTController extends Controller
 
     public function getBt($id)
     {
-    	$bt = $this->bt->find($id);
-    	if(!$bt){
-    		return Response::json(['response' => "Not Found!"], 400);
-    	}
-    	return Response::json(['result' => $bt],200);
+        $bt = $this->bt->find($id);
+        if(!$bt){
+            return Response::json(['response' => "Not Found!"], 400);
+        }
+        return Response::json(['result' => $bt],200);
     }
     public function allJops()
     {
@@ -43,10 +43,10 @@ class APIJopAndBTController extends Controller
 
     public function getJop($id)
     {
-    	$jop = $this->jop->find($id);
-    	if(!$company){
-    		return Response::json(['response' => "Not Found!"], 400);
-    	}
-    	return Response::json(['result' => $jop],200);
+        $jop = $this->jop->find($id);
+        if(!$company){
+            return Response::json(['response' => "Not Found!"], 400);
+        }
+        return Response::json(['result' => $jop],200);
     }
 }

@@ -21,10 +21,10 @@ class PasswordController extends Controller
     use ResetsPasswords;
 
     /**
-     * Create a new password controller instance.
-     *
-     * @return void
-     */
+    * Create a new password controller instance.
+    *
+    * @return void
+    */
     public function __construct()
     {
         $this->middleware('guest');

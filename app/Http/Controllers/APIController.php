@@ -124,4 +124,47 @@ class APIController extends Controller
     	return Response::json(['response' => "Updated Successfully!"], 200);
 
     }
+
+
+    public function imgaeUpload(Request $request)
+    {
+        //Checks if request has file or not
+        if ($request->hasFile('image')) {
+            //checks if file is uploaded or not
+            if ($request->file('image')->isValid()) {
+
+                $user = User::find($request['id']);
+
+                $extension = $request->file('image')->getClientOriginalExtension();
+                $sha1 = sha1($request->file('image')->getClientOriginalName());
+                $filename = date('Y-m-d-h-i-s')."_".$sha1.".".$extension;
+                // this path is for the server but in the local you need to make public_path() function
+                $path  = '/home7/deziquec/public_html/professearch/'.'src/images/users/';
+
+                $image = '/home7/deziquec/public_html/professearch/'.$user->image;
+
+                $request->file('image')->move($path, $filename);
+                $user->image = 'src/images/users/'.$filename;
+                $user->save();
+
+                if($image){
+                    unlink($image);
+                }
+
+                if(!$user){
+                    return Response::json(['response' => "Error Updating The User Image!"], 400);
+                }
+
+                return Response::json(['response' => "Image Updated Successfully!"], 200);
+
+            }else {
+                return Response::json(['response' => "Image Is Not Valid!"], 200);
+            }
+        }else {
+            return Response::json(['response' => "You did't Send Any Files!"], 200);
+        }
+
+    }
+
+
 }

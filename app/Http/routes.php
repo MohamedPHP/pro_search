@@ -329,3 +329,15 @@ Route::group(['prefix'=>'api'], function(){
 
 });
 /*End login Web Survice*/
+
+/*Start UserImage Web Survice*/
+Route::group(['prefix'=>'api'], function(){
+
+    Route::group(['prefix'=>'user'],function(){
+
+        Route::post('image',['uses'=> 'APIController@imgaeUpload']);
+
+    });
+
+});
+/*End UserImage Web Survice*/
