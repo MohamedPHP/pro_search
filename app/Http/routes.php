@@ -76,7 +76,7 @@ Route::group(['prefix' => '/search'], function() {
 
 /*Start Admin*/
 
-Route::group(['middleware' => 'auth'], function (){
+Route::group(['middleware' => 'admin'], function (){
 
     Route::group(['prefix' => '/admin'], function (){
 
@@ -336,6 +336,11 @@ Route::group(['prefix'=>'api'], function(){
     Route::group(['prefix'=>'user'],function(){
 
         Route::post('image',['uses'=> 'APIController@imgaeUpload']);
+
+    });
+    Route::group(['prefix'=>'company'],function(){
+
+        Route::post('image',['uses'=> 'APICompanyController@imgaeUpload']);
 
     });
 

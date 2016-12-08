@@ -23,7 +23,7 @@
 			<div class="profile-sidebar">
 				<!-- SIDEBAR USERPIC -->
 				<div class="profile-userpic">
-					<img src="http://placehold.it/100/100" class="img-responsive" alt="">
+					<img src="{{ asset($company->image) }}" class="img-responsive" alt="">
 				</div>
                 {{-- `id`, `company_name`, `address`, `username`, `business_type`, `website`, `hashedcode`, `password`, `founder_date` --}}
 				<!-- END SIDEBAR USERPIC -->
@@ -116,6 +116,12 @@
                             <div class="form-group">
                                 <label for="phone">founder_date</label>
                                 <input type="date" class="form-control" id="founder_date" name="founder_date" placeholder="founder_date" value="{{ $company->founder_date }}">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Image</label>
+                                <input type="file" name="image" class="filestyle">
                             </div>
                         </div>
                         <div class="col-md-4 col-md-offset-4">

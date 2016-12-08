@@ -42,6 +42,7 @@ class CompanyController extends Controller
         $company->phones       = $request['phones'];
         $company->password      = bcrypt($request['password']);
         $company->founder_date  = $request['founder_date'];
+        $company->image  = 'src/images/logo.png';
         $company->save();
 
         $company_name = str_split($company->company_name, 3);
@@ -63,12 +64,13 @@ class CompanyController extends Controller
         $this->validate($request, [
         'company_name'  =>  'required|min:4',
         'address'       =>  'required',
-        'username'         =>  'required|email',
+        'username'      =>  'required|email',
         'business_type' =>  'required',
         'website'       =>  'required|url',
         'phones'        =>  'required',
         'password'      =>  'required|min:6',
         'founder_date'  =>  'required',
+        'image'         =>  'image',
         ]);
         $company = Company::find($id);
         $company->company_name  = $request['company_name'];
@@ -80,11 +82,28 @@ class CompanyController extends Controller
         if ($request['password'] !== $company->password) {
             $company->password = bcrypt($request['password']);
         }
+        if ($company->image == 'src/images/logo.png') {
+            $company->image = $this->upload($request['image']);
+        }else {
+            $company = $company->image;
+            unlink('/home7/deziquec/public_html/professearch/'.$image);
+            $company->image = $this->upload($request['image']);
+        }
         $company->founder_date  = $request['founder_date'];
         $company->save();
 
         return redirect()->back()->with(['message' => 'The Company "'.$company->company_name.'" Updated Successfully']);
     }
+
+    public function upload($file){
+        $extension = $file->getClientOriginalExtension();
+        $sha1 = sha1($file->getClientOriginalName());
+        $filename = date('Y-m-d-h-i-s')."_".$sha1.".".$extension;
+        $path  = '/home7/deziquec/public_html/professearch/'.'src/images/companies/';
+        $file->move($path, $filename);
+        return 'src/images/companies/'.$filename;
+    }
+
     public function delete($id)
     {
         $company = Company::find($id);
@@ -108,13 +127,14 @@ class CompanyController extends Controller
         // `id`, `company_name`, `address`, `username`, `business_type`,
         // `website`, `hashedcode`, `password`, `founder_date`
         $this->validate($request, [
-        'company_name'  =>  'required',
-        'address'       =>  'required',
-        'username'      =>  'required|email',
-        'business_type' =>  'required',
-        'password'      =>  'required',
-        'website'       =>  'url',
-        'founder_date'  =>  'required|date',
+            'company_name'  =>  'required',
+            'address'       =>  'required',
+            'username'      =>  'required|email|unique:companies'.$id,
+            'business_type' =>  'required',
+            'password'      =>  'required',
+            'website'       =>  'url',
+            'founder_date'  =>  'required|date',
+            'image'         =>  'image',
         ]);
         $company = Company::find($id);
         $company->company_name  = $request['company_name'];
@@ -124,6 +144,13 @@ class CompanyController extends Controller
         $company->business_type       = $request['business_type'];
         $company->password      = $request['password'];
         $company->founder_date  = $request['founder_date'];
+        if ($company->image == 'src/images/logo.png') {
+            $company->image = $this->upload($request['image']);
+        }else {
+            $company = $company->image;
+            unlink('/home7/deziquec/public_html/professearch/'.$image);
+            $company->image = $this->upload($request['image']);
+        }
         $company->save();
 
         return redirect()->back()->with(['message' => 'The Company Profile Has Been Updated Successfully']);

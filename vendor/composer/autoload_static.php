@@ -301,6 +301,9 @@ class ComposerStaticInitfde909a782acf646e84d75f3724ab5a6
     );
 
     public static $classMap = array (
+        'BSTableSeeder' => __DIR__ . '/../..' . '/database/seeds/BSTableSeeder.php',
+        'CompanyDatasSeeder' => __DIR__ . '/../..' . '/database/seeds/CompanyDatasSeeder.php',
+        'CompanyTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CompanyTableSeeder.php',
         'CreateBussnessTypesTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_24_123317_create_bussness_types_table.php',
         'CreateCompaniesTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_15_163745_create_companies_table.php',
         'CreateCompanyDatasTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_29_145118_create_company_datas_table.php',

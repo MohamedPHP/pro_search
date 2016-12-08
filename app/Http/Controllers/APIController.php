@@ -61,13 +61,13 @@ class APIController extends Controller
         $user->age       = $request['age'];
         $user->gender    = $request['gender'];
         $user->image     = 'src/images/avatar.png';
-        if (count(Jop::where('content', $request['job_title'])) == 0) {
+        if (count(Jop::where('content', $request['job_title'])->get()) == 0) {
             $jop = new Jop();
             $jop->content = $request['job_title'];
             $jop->save();
             $user->jop_id = $jop->id;
-        }elseif (count(Jop::where('content', $request['job_title'])) > 0) {
-            $jop = Jop::where('content', $request['job_title'])->get();
+        }elseif (count(Jop::where('content', $request['job_title'])->get()) > 0) {
+            $jop = Jop::where('content', $request['job_title'])->first();
             $user->jop_id = $jop->id;
         }
 
@@ -96,7 +96,7 @@ class APIController extends Controller
 
     public function updateUser(Request $request, $id)
     {
-        return Response::json(['response' => "Updated Successertertyey6fully!"], 200);
+        return Response::json(['response' => "Updated Successfully!"], 200);
     	$user =  $this->user->find($id);
 
         $user->username  = $request['username'];

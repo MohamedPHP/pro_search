@@ -115,6 +115,12 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Image</label>
+                                <input type="file" name="image" class="filestyle">
+                            </div>
+                        </div>
                         <div class="col-md-4 col-md-offset-4">
                             <button type="submit" class="btn btn-primary btn-block">Edit Profile</button>
                         </div>

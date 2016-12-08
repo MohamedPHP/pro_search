@@ -17,8 +17,8 @@ class IsUserAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->userType !== 1){
-             return redirect()->route('welcome');
+        if(Auth::user()->isadmin !== 1){
+             return redirect('/');
         }
         return $next($request);
     }

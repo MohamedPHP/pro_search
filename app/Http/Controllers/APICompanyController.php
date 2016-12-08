@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Company;
 use Response;
 use App\CompanyData;
-use BussnessType;
+use App\BussnessType;
 use Auth;
 
 class APICompanyController extends Controller
@@ -53,20 +53,20 @@ class APICompanyController extends Controller
         $company->company_name  = $request['company_name'];
         $company->address       = $request['address'];
         $company->username      = $request['email'];
-        if (count(BussnessType::where('bussness_type', $request['business_type'])) == 0) {
+        if (count(BussnessType::where('bussness_type', $request['business_type'])->get()) == 0) {
             $bt = new BussnessType();
-            $bt->bussness_type = $request['founder_date'];
+            $bt->bussness_type = $request['business_type'];
             $bt->save();
             $company->business_type = $bt->id;
-        }elseif (count(BussnessType::where('bussness_type', $request['business_type'])) > 0) {
-            $bt = BussnessType::where('bussness_type', $request['business_type'])->get();
+        }elseif (count(BussnessType::where('bussness_type', $request['business_type'])->get()) > 0) {
+            $bt = BussnessType::where('bussness_type', $request['business_type'])->first();
             $company->business_type = $bt->id;
         }
-        $company->business_type = $request['business_type'];
         $company->phones        = $request['phones'];
         $company->website       = $request['website'];
         $company->password      = bcrypt($request['password']);
         $company->founder_date  = $request['founder_date'];
+        $company->image  = 'src/images/logo.png';
         $company->save();
 
         $company_name = str_split($company->company_name, 3);
@@ -87,11 +87,21 @@ class APICompanyController extends Controller
         $company->company_name  = $request['company_name'];
         $company->address       = $request['address'];
         $company->username      = $request['email'];
-        $company->business_type = $request['business_type'];
+        if (count(BussnessType::where('bussness_type', $request['business_type'])->get()) == 0) {
+            $bt = new BussnessType();
+            $bt->bussness_type = $request['business_type'];
+            $bt->save();
+            $company->business_type = $bt->id;
+        }elseif (count(BussnessType::where('bussness_type', $request['business_type'])->get()) > 0) {
+            $bt = BussnessType::where('bussness_type', $request['business_type'])->first();
+            $company->business_type = $bt->id;
+        }
         $company->phones        = $request['phones'];
         $company->website       = $request['website'];
         $company->password      = bcrypt($request['password']);
         $company->founder_date  = $request['founder_date'];
+        $image = $company->image;
+        $company->image  = $image;
         $company->save();
 
         if(!$company){
@@ -108,4 +118,46 @@ class APICompanyController extends Controller
         }
         return Response::json(['result' => $company_data],200);
     }
+
+    public function imgaeUpload(Request $request)
+    {
+        //Checks if request has file or not
+        if ($request->hasFile('image')) {
+            //checks if file is uploaded or not
+            if ($request->file('image')->isValid()) {
+
+                $company = Company::find($request['id']);
+
+                $extension = $request->file('image')->getClientOriginalExtension();
+                $sha1 = sha1($request->file('image')->getClientOriginalName());
+                $filename = date('Y-m-d-h-i-s')."_".$sha1.".".$extension;
+                // this path is for the server but in the local you need to make public_path() function
+                $path  = '/home7/deziquec/public_html/professearch/'.'src/images/companies/';
+
+                $image = '/home7/deziquec/public_html/professearch/'.$company->image;
+
+                $request->file('image')->move($path, $filename);
+                $company->image = 'src/images/users/'.$filename;
+                $company->save();
+
+                if($image){
+                    unlink($image);
+                }
+
+                if(!$company){
+                    return Response::json(['response' => "Error Updating The User Image!"], 400);
+                }
+
+                return Response::json(['response' => "Image Updated Successfully!"], 200);
+
+            }else {
+                return Response::json(['response' => "Image Is Not Valid!"], 200);
+            }
+        }else {
+            return Response::json(['response' => "You did't Send Any Files!"], 200);
+        }
+
+    }
+
+
 }

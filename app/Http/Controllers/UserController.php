@@ -19,7 +19,7 @@ class UserController extends Controller
         $companies = Company::all();
         return view('backend.pages.dashboard', compact('users', 'companies'));
     }
-    
+
     public function index()
     {
         $users = User::where('isadmin', 0)->get();
@@ -53,6 +53,7 @@ class UserController extends Controller
         $user->age = $request['age'];
         $user->gender = $request['gender'];
         $user->jop_id = $request['jop_id'];
+        $user->image = 'src/images/avatar.png';
 
         $user->save();
 
@@ -78,6 +79,17 @@ class UserController extends Controller
 
     public function updateProfile(Request $request, $id)
     {
+        $this->validate($request, [
+            'Username'  =>  'required|',
+            'firstname' =>  'required|',
+            'lastname'  =>  'required|',
+            'password'  =>  'required|',
+            'phone'     =>  'required|',
+            'email'     =>  'required|email|unique:users'.$id,
+            'age'       =>  'required|',
+            'jop_id'    =>  'required|',
+            'image'     =>  'image',
+        ]);
         $user = User::find($id);
         $user->Username     = $request['Username'];
         $user->firstname    = $request['firstname'];
@@ -89,8 +101,24 @@ class UserController extends Controller
         $user->email        = $request['email'];
         $user->age          = $request['age'];
         $user->jop_id       = $request['jop_id'];
+        if ($user->image == 'src/images/avatar.png') {
+            $user->image = $this->upload($request['image']);
+        }else {
+            $image = $user->image;
+            unlink('/home7/deziquec/public_html/professearch/'.$image);
+            $user->image = $this->upload($request['image']);
+        }
         $user->save();
         return redirect()->back()->with(['message' => 'Profile Updated Successfully']);
+    }
+
+    public function upload($file){
+        $extension = $file->getClientOriginalExtension();
+        $sha1 = sha1($file->getClientOriginalName());
+        $filename = date('Y-m-d-h-i-s')."_".$sha1.".".$extension;
+        $path  = '/home7/deziquec/public_html/professearch/'.'src/images/users/';
+        $file->move($path, $filename);
+        return 'src/images/users/'.$filename;
     }
 
     public function viewUpdate($id)
