@@ -47,7 +47,7 @@
                                                   <h5><i class="fa fa-envelope"></i> Email: {{ $result->email }}</h5>
                                              @endif
                                              @if ($result->business_type)
-                                                  <h5><i class="fa fa-briefcase"></i> Phone No: {{ \App\BussnessType::where('id', $result->business_type)->first()->bussness_type }}</h5>
+                                                  <h5><i class="fa fa-briefcase"></i> Bussness Type: {{ \App\BussnessType::where('id', $result->business_type)->first()->bussness_type }}</h5>
                                              @endif
                                         </div>
                                    </div>
@@ -60,6 +60,6 @@
 
 
 
-          
+
 
 @endsection

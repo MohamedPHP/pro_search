@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Company;
+use App\CompanyData;
 use App\BussnessType;
 use App\Jop;
 use Response;
@@ -55,18 +56,18 @@ class SearchController extends Controller
         if ($request->searchType == 1) {
             if ($searchType == 'name') {
                 // get the matched data
-                $searchResultsCompany = Company::where('company_name', 'like', "$searchWord%")
+                $searchResultsCompany = Company::where('company_name', 'like', "%$searchWord%")
                 ->orderBy('company_name', 'ASC')->get();
             }elseif($searchType == 'Job'){
                 // join to get the users that related to the job by advanced join
                 $searchResultsCompany = BussnessType::join('companies', function($j) use($searchWord) {
                     $j->on('companies.business_type', '=', 'bussness_types.id')
-                    ->where('bussness_types.bussness_type', 'like', "$searchWord%");
+                    ->where('bussness_types.bussness_type', 'like', "%$searchWord%");
                 })
                 ->get();
             }elseif($searchType == 'email') {
                 // get the matched data
-                $searchResultsCompany = Company::where('username', 'like', "$searchWord%")->orderBy('company_name', 'ASC')->get();
+                $searchResultsCompany = Company::where('username', 'like', "%$searchWord%")->orderBy('company_name', 'ASC')->get();
             }
 
             // return the data
