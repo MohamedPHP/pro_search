@@ -10,7 +10,7 @@
 
 @section('styles')
 
-<link rel="stylesheet" href="{{asset('datatables/css/datatables.bootstrap.min.css')}}" media="screen" title="no title">
+<link rel="stylesheet" href="{{asset('datatables/css/dataTables.bootstrap.min.css')}}" media="screen" title="no title">
 <style media="screen">
     .input{
         margin-top: -30px;
@@ -146,9 +146,9 @@
 
 @section('scripts')
 
-    <script src="{{asset('datatables/js/jquery.datatables.min.js')}}"></script>
+    <script src="{{asset('datatables/js/jquery.dataTables.min.js')}}"></script>
 
-    <script src="{{asset('datatables/js/datatables.bootstrap.min.js')}}"></script>
+    <script src="{{asset('datatables/js/dataTables.bootstrap.min.js')}}"></script>
 
     <script>
     	$('#table').dataTable();
