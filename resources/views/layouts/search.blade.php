@@ -48,6 +48,16 @@
 							</li>
 						@endif
 					@endif
+					@if (Auth::check())
+						@if (Auth::user()->isadmin == 1 || Auth::user()->isadmin == 2)
+							<li>
+								<a href="{{ url('/DataEntry/companiesdata') }}">
+									<i class="fa fa-user" aria-hidden="true"></i>
+									EntryBoard
+								</a>
+							</li>
+						@endif
+					@endif
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::check())

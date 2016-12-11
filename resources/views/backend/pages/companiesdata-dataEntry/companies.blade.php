@@ -3,7 +3,7 @@
 
 @section('title')
     <?php
-        $pagename = 'CompaniesData';
+        $pagename = 'CompaniesDataEntry';
     ?>
     {{ $pagename }}
 @endsection
@@ -33,13 +33,11 @@
                         <th>phones</th>
                         <th>business_type</th>
                         <th>website</th>
-                        <th>edit</th>
-                        <th>delete</th>
                     </thead>
                     <tbody>
                         @foreach ($companydata as $company)
                             <tr>
-                                <td>#{{ $company->id }}</td>
+                                <td>{{ $company->id }}</td>
                                 <td>{{ $company->name }}</td>
                                 <td>{{ $company->email }}</td>
                                 <td>{{ $company->address }}</td>
@@ -49,12 +47,6 @@
                                 ?>
                                 <td>{{ $CompanyBussness->bussness_type }}</td>
                                 <td><a href="{{ $company->website }}" class="btn-sm btn-primary">Website</a></td>
-                                <td>
-                                    <a href="{{ route('companiesdata-get-update', ['id' => $company->id]) }}" class="btn-sm btn-success"><i class="fa fa-crop" aria-hidden="true"></i></a>
-                                </td>
-                                <td>
-                                    <a href="{{ route('companiesdata.delete', ['id' => $company->id]) }}" class="btn-sm btn-danger"><i class="fa fa-window-close" aria-hidden="true"></i></a>
-                                </td>
                             </tr>
                         @endforeach
                     </tbody>

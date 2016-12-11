@@ -71,7 +71,27 @@ Route::group(['prefix' => '/search'], function() {
 /*End search*/
 
 
+/*DataEntry*/
+Route::group(['middleware' => 'entry'], function (){
+    Route::group(['prefix' => '/DataEntry'], function (){
+        // Start companiesdata
+        Route::get('/companiesdata', [
+            'uses' => 'Companies_DataController@indexDataEntry',
+            'as'   => 'companiesdata.index.DataEntry'
+        ]);
+        Route::get('/companiesdata/create', [
+            'uses' => 'Companies_DataController@getcreateDataEntry',
+            'as'   => 'companiesdata-get-create.DataEntry'
+        ]);
+        Route::post('/companiesdata/create', [
+            'uses' => 'Companies_DataController@createDataEntry',
+            'as'   => 'companiesdata.create.DataEntry'
+        ]);
+        // End companiesdata
+    });
+});
 
+/*DataEntry*/
 
 
 /*Start Admin*/

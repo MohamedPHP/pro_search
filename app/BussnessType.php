@@ -8,7 +8,7 @@ class BussnessType extends Model
 {
     public function companies()
     {
-        $this->hasMany('App\Company');
+        return $this->hasMany('App\Company');
     }
     public function companiesData()
     {

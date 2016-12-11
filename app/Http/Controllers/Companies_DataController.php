@@ -57,4 +57,28 @@ class Companies_DataController extends Controller
         $c->delete();
         return redirect()->back()->with(['message' => 'The DataCompany Deleted Successfully']);
     }
+
+    public function indexDataEntry()
+    {
+        $companydata = CompanyData::all();
+        return view('backend.pages.companiesdata-dataEntry.companies', compact('companydata'));
+    }
+    public function getcreateDataEntry()
+    {
+        return view('backend.pages.companiesdata-dataEntry.companies-create');
+    }
+    public function createDataEntry(Request $request)
+    {
+        $c = new CompanyData();
+        $c->name = $request['name'];
+        $c->email = $request['email'];
+        $c->address = $request['address'];
+        $c->phones = $request['phones'];
+        $c->website = $request['website'];
+        $c->business_type_d = $request['business_type'];
+        $c->save();
+
+        return redirect()->back()->with(['message' => 'The DataCompany Added Successfully']);
+    }
+
 }

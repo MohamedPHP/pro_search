@@ -36,6 +36,17 @@
             </div>
         </div>
     </div>
+    <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header" data-background-color="red">
+                <i class="material-icons">Companies Data</i>
+            </div>
+            <div class="card-content">
+                <p class="category">Companies</p>
+                <h3 class="title">{{ count($companiesData) }}</h3>
+            </div>
+        </div>
+    </div>
 @endsection
 
 

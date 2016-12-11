@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Jop;
 use App\User;
 use App\Company;
+use App\CompanyData;
 
 class UserController extends Controller
 {
@@ -17,7 +18,8 @@ class UserController extends Controller
     {
         $users = User::where('isadmin', 0)->get();
         $companies = Company::all();
-        return view('backend.pages.dashboard', compact('users', 'companies'));
+        $companiesData = CompanyData::all();
+        return view('backend.pages.dashboard', compact('users', 'companies', 'companiesData'));
     }
 
     public function index()

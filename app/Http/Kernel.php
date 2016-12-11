@@ -34,6 +34,10 @@ class Kernel extends HttpKernel
              \App\Http\Middleware\Authenticate::class,
              \App\Http\Middleware\IsUserAdmin::class,
         ],
+        'entry' => [
+             \App\Http\Middleware\Authenticate::class,
+             \App\Http\Middleware\IsUserDataEntry::class,
+        ],
 
         'api' => [
             'throttle:60,1',
