@@ -12,6 +12,7 @@ use App\CompanyData;
 use App\BussnessType;
 use App\Jop;
 use Response;
+use DB;
 class SearchController extends Controller
 {
     public function search(Request $request)
@@ -167,27 +168,40 @@ class SearchController extends Controller
             $searchWord = $request['search_word'];
             if ($request['search_about'] == 'person') {
                 if ($request['search_by'] == 'name') {
-                    $searchResults = User::select("id","username","firstname","lastname","phone","email","age","gender","hashedcode","jop_id")->where(function($q) use ($searchWord) {
-                        $q->where("firstname" , 'like', "%$searchWord%"); // search by firstname
-                        $q->orWhere("lastname" , 'like', "%$searchWord%"); // search by lastname
-                        $q->orWhere("username" , 'like', "%$searchWord%"); // search by username
-                    })
-                    ->orderBy('firstname', 'ASC')->get();
-                } elseif($request['search_by'] == 'Job'){
+                    $searchResults = DB::table('users')
+                        ->join('jops', 'users.jop_id', '=', 'jops.id')
+                        ->where('users.username', 'like', "%$searchWord%")
+                        ->orWhere('users.firstname', 'like', "%$searchWord%")
+                        ->orWhere('users.lastname', 'like', "%$searchWord%")
+                        // determine the cols that i want
+                        ->select("users.id","users.username",
+                                 "users.firstname","users.lastname",
+                                 "users.phone","users.email",
+                                 "users.age","users.gender",
+                                 "jops.content","users.image")
+                        ->get();
+                } elseif($request['search_by'] == 'job'){
                     $searchResults = Jop::join('users', function($j) use($searchWord) {
                         $j->on('users.jop_id', '=', 'jops.id')
                         ->where('jops.content', 'like', "%$searchWord%");
-                    })->select("users.id","username","firstname","lastname","phone","email","age","gender","jop_id")
+                    })->select("users.id","username","firstname","lastname","phone","email","age","gender","jops.content", "image")
                     ->get();
                 } elseif($request['search_by'] == 'email'){
-                    $searchResults = User::select("id","username","firstname","lastname","phone","email","age","gender","jop_id")->
-                    where("email" , 'like', "$searchWord%")
-                    ->orderBy('firstname', 'ASC')->get();
+                    $searchResults = Jop::join('users', function($j) use($searchWord) {
+                        $j->on('users.jop_id', '=', 'jops.id')
+                        ->where('users.email', 'like', "%$searchWord%");
+                    })->select("users.id","username","firstname","lastname","phone","email","age","gender","jops.content", "image")
+                    ->orderBy('firstname', 'ASC')
+                    ->get();
                 } elseif($request['search_by'] == 'phone'){
-                    $searchResults = User::select("id","username","firstname","lastname","phone","email","age","gender","jop_id")
-                    ->where("phone" , 'like', "$searchWord%")
-                    ->orderBy('firstname', 'ASC')->get();
+                    $searchResults = Jop::join('users', function($j) use($searchWord) {
+                        $j->on('users.jop_id', '=', 'jops.id')
+                        ->where('users.phone', 'like', "%$searchWord%");
+                    })->select("users.id","username","firstname","lastname","phone","email","age","gender","jops.content", "image")
+                    ->orderBy('firstname', 'ASC')
+                    ->get();
                 }
+
                 return Response::json(['result' => $searchResults], 200);
             }
 

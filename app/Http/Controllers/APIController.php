@@ -29,9 +29,12 @@ class APIController extends Controller
     public function loginUser(Request $request)
     {
         if (count(User::where('hashedcode', $request['hashedcode'])->first()) > 0) {
-            return Response::json(['response' => "Found"], 200);
+            $userData = User::where('hashedcode', $request['hashedcode'])->first();
+            $jop = Jop::where('id' ,$userData->jop_id)->first();
+
+            return Response::json(['response' => $userData, 'job_title' => $jop->content,'status' => 'Found'], 200);
         }else {
-            return Response::json(['response' => "Not Found"], 400);
+            return Response::json(['status' => "Not Found"], 200);
         }
     }
 

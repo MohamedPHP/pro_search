@@ -30,9 +30,11 @@ class APICompanyController extends Controller
     public function loginCompany(Request $request)
     {
         if (count(Company::where('hashedcode', $request['hashedcode'])->first()) > 0) {
-            return Response::json(['response' => "Found"], 200);
+            $companyData = Company::where('hashedcode', $request['hashedcode'])->first();
+            $bussness = BussnessType::where('id', $companyData->business_type)->first();
+            return Response::json(['response' => $companyData, 'bussnessType' => $bussness->bussness_type, 'status' => 'Found'], 200);
         }else {
-            return Response::json(['response' => "Not Found"], 400);
+            return Response::json(['status' => "Not Found"], 200);
         }
     }
 
