@@ -11,6 +11,7 @@ use App\User;
 use Response;
 use App\Jop;
 use Auth;
+use DB;
 class APIController extends Controller
 {
     public function __construct(User $user){
@@ -44,7 +45,7 @@ class APIController extends Controller
     	$user = $this->user->find($id);
 
     	if(!$user){
-    		return Response::json(['response' => "Not Found!"], 400);
+    		return Response::json(['response' => "Not Found!"], 200);
     	}
 
     	return Response::json(['result' => $user],200);
@@ -59,7 +60,7 @@ class APIController extends Controller
         $user->firstname = $request['firstname'];
         $user->lastname  = $request['lastname'];
         $user->password  = bcrypt($request['password']);
-        $user->phone     = $request['phone_no'];
+        $user->phone     = $request['phone'];
         $user->email     = $request['email'];
         $user->age       = $request['age'];
         $user->gender    = $request['gender'];
@@ -90,26 +91,33 @@ class APIController extends Controller
 
 
     	if(!$user){
-    		return Response::json(['response' => "Error Saving The User!"], 400);
+    		return Response::json(['status' => "Error"], 200);
     	}
-
-    	return Response::json(['response' => "Saved Successfully!"], 200);
+        $data = DB::table('users')
+            ->join('jops', 'users.jop_id', '=', 'jops.id')
+            ->where('users.id', '=', $user->id)
+            // determine the cols that i want
+            ->select("users.id","users.username",
+                     "users.firstname","users.lastname",
+                     "users.phone","users.email",
+                     "users.age","users.gender",
+                     "jops.content as job_title","users.image", "users.hashedcode")
+            ->first();
+        return Response::json(['response' => $data, "status" => "Saved"], 200);
     }
 
 
-    public function updateUser(Request $request, $id)
+    public function updateUser(Request $request)
     {
-        return Response::json(['response' => "Updated Successfully!"], 200);
-    	$user =  $this->user->find($id);
+    	$user =  $this->user->find($request['id']);
 
         $user->username  = $request['username'];
         $user->firstname = $request['firstname'];
         $user->lastname  = $request['lastname'];
         $user->password  = bcrypt($request['password']);
-        $user->phone     = $request['phone_no'];
+        $user->phone     = $request['phone'];
         $user->email     = $request['email'];
         $user->age       = $request['age'];
-        $user->gender    = $request['gender'];
         if (count(Jop::where('content', $request['job_title'])->first()) == 0) {
             $jop = new Jop();
             $jop->content = $request['job_title'];
@@ -122,9 +130,9 @@ class APIController extends Controller
         $user->save();
 
     	if(!$user){
-    		return Response::json(['response' => "Error Updating The User!"], 400);
+    		return Response::json(['status' => "Error"], 200);
     	}
-    	return Response::json(['response' => "Updated Successfully!"], 200);
+    	return Response::json(['status' => "Updated"], 200);
 
     }
 
@@ -143,19 +151,19 @@ class APIController extends Controller
                 $filename = date('Y-m-d-h-i-s')."_".$sha1.".".$extension;
                 // this path is for the server but in the local you need to make public_path() function
                 $path  = '/home7/deziquec/public_html/professearch/'.'src/images/users/';
-
-                $image = '/home7/deziquec/public_html/professearch/'.$user->image;
-
+                if ($user->image == 'src/images/avatar.png') {
+                    $image = 'src/images/users/'.$filename;
+                }elseif ($user->image != 'src/images/avatar.png') {
+                    $pathUnlink  = '/home7/deziquec/public_html/professearch/' . $user->image;
+                    unlink($pathUnlink);
+                    $image = 'src/images/users/' . $filename;
+                }
                 $request->file('image')->move($path, $filename);
-                $user->image = 'src/images/users/'.$filename;
+                $user->image = $image;
                 $user->save();
 
-                if($image){
-                    unlink($image);
-                }
-
                 if(!$user){
-                    return Response::json(['response' => "Error Updating The User Image!"], 400);
+                    return Response::json(['response' => "Error Updating The User Image!"], 200);
                 }
 
                 return Response::json(['response' => "Image Updated Successfully!"], 200);

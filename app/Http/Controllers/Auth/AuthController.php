@@ -88,6 +88,7 @@ class AuthController extends Controller
         'jop_id'    => $data['jop_id'],
         'gender'    => $data['gender'],
         'age'       => $data['age'],
+        'image'     => 'src/images/avatar.png',
         ]);
 
         $fristname = str_split($data['fristname'], 2);

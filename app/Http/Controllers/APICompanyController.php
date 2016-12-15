@@ -12,6 +12,7 @@ use Response;
 use App\CompanyData;
 use App\BussnessType;
 use Auth;
+use DB;
 
 class APICompanyController extends Controller
 {
@@ -43,7 +44,7 @@ class APICompanyController extends Controller
     {
         $company = $this->company->find($id);
         if(!$company){
-            return Response::json(['response' => "Not Found!"], 400);
+            return Response::json(['response' => "Not Found!"], 200);
         }
         return Response::json(['result' => $company],200);
     }
@@ -78,14 +79,24 @@ class APICompanyController extends Controller
         $company2->save();
 
         if(!$company){
-            return Response::json(['response' => "Error Saveing The Comapny!"], 400);
+            return Response::json(['status' => "Error"], 200);
         }
-        return Response::json(['response' => "Saved Successfully!"], 200);
+        $data = DB::table('companies')
+            ->join('bussness_types', 'companies.business_type', '=', 'bussness_types.id')
+            ->where('companies.id', '=', $company->id)
+            // determine the cols that i want
+            ->select("companies.id","companies.company_name",
+                     "companies.address","companies.username",
+                     "companies.phones","companies.website",
+                     "companies.image","bussness_types.bussness_type as business_type",
+                     "companies.founder_date", "companies.hashedcode")
+            ->first();
+        return Response::json(['response' => $data, "status" => "Saved"], 200);
     }
 
-    public function updateCompany(Request $request, $id)
+    public function updateCompany(Request $request)
     {
-        $company =  $this->company->find($id);
+        $company =  $this->company->find($request['id']);
         $company->company_name  = $request['company_name'];
         $company->address       = $request['address'];
         $company->username      = $request['email'];
@@ -102,21 +113,19 @@ class APICompanyController extends Controller
         $company->website       = $request['website'];
         $company->password      = bcrypt($request['password']);
         $company->founder_date  = $request['founder_date'];
-        $image = $company->image;
-        $company->image  = $image;
         $company->save();
 
         if(!$company){
-            return Response::json(['response' => "Error Updating The Comapny!"], 400);
+            return Response::json(['status' => "Error"], 200);
         }
-        return Response::json(['response' => "Updated Successfully!"], 200);
+        return Response::json(['status' => "Updated"], 200);
     }
 
     public function getCompanyData()
     {
         $company_data = CompanyData::all();
         if(!$company_data){
-            return Response::json(['response' => "Not Found!"], 400);
+            return Response::json(['response' => "Not Found!"], 200);
         }
         return Response::json(['result' => $company_data],200);
     }
@@ -135,19 +144,19 @@ class APICompanyController extends Controller
                 $filename = date('Y-m-d-h-i-s')."_".$sha1.".".$extension;
                 // this path is for the server but in the local you need to make public_path() function
                 $path  = '/home7/deziquec/public_html/professearch/'.'src/images/companies/';
-
-                $image = '/home7/deziquec/public_html/professearch/'.$company->image;
-
+                if ($company->image == 'src/images/logo.png') {
+                    $image = 'src/images/companies/'.$filename;
+                }elseif ($company->image != 'src/images/logo.png') {
+                    $pathUnlink  = '/home7/deziquec/public_html/professearch/' . $company->image;
+                    unlink($pathUnlink);
+                    $image = 'src/images/companies/' . $filename;
+                }
                 $request->file('image')->move($path, $filename);
-                $company->image = 'src/images/users/'.$filename;
+                $company->image = $image;
                 $company->save();
 
-                if($image){
-                    unlink($image);
-                }
-
                 if(!$company){
-                    return Response::json(['response' => "Error Updating The User Image!"], 400);
+                    return Response::json(['response' => "Error Updating The User Image!"], 200);
                 }
 
                 return Response::json(['response' => "Image Updated Successfully!"], 200);

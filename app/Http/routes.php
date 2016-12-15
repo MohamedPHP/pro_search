@@ -252,7 +252,7 @@ Route::group(['prefix'=>'api'], function(){
 
 		Route::post('save',['uses'=>'APIController@saveUser']);
 
-		Route::post('update/{id}',['uses'=>'APIController@updateUser']);
+		Route::post('update',['uses'=>'APIController@updateUser']);
 	});
 });
 /*End User Web Survice*/
@@ -269,7 +269,7 @@ Route::group(['prefix'=>'api'], function(){
 
 		Route::post('save', 'APICompanyController@saveCompany');
 
-		Route::post('update/{id}', 'APICompanyController@updateCompany');
+		Route::post('update', 'APICompanyController@updateCompany');
 
 	});
 

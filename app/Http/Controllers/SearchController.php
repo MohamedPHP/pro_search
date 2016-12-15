@@ -166,8 +166,17 @@ class SearchController extends Controller
             // search_by **
             // search_word **
             $searchWord = $request['search_word'];
-            if ($request['search_about'] == 'person') {
+
+
+
+
+
+
+
+            if ($request['search_about'] == 'person') { // start user search about
+
                 if ($request['search_by'] == 'name') {
+
                     $searchResults = DB::table('users')
                         ->join('jops', 'users.jop_id', '=', 'jops.id')
                         ->where('users.username', 'like', "%$searchWord%")
@@ -180,50 +189,92 @@ class SearchController extends Controller
                                  "users.age","users.gender",
                                  "jops.content","users.image")
                         ->get();
+
                 } elseif($request['search_by'] == 'job'){
+
                     $searchResults = Jop::join('users', function($j) use($searchWord) {
                         $j->on('users.jop_id', '=', 'jops.id')
                         ->where('jops.content', 'like', "%$searchWord%");
                     })->select("users.id","username","firstname","lastname","phone","email","age","gender","jops.content", "image")
                     ->get();
+
                 } elseif($request['search_by'] == 'email'){
+
                     $searchResults = Jop::join('users', function($j) use($searchWord) {
                         $j->on('users.jop_id', '=', 'jops.id')
                         ->where('users.email', 'like', "%$searchWord%");
                     })->select("users.id","username","firstname","lastname","phone","email","age","gender","jops.content", "image")
                     ->orderBy('firstname', 'ASC')
                     ->get();
+
                 } elseif($request['search_by'] == 'phone'){
+
                     $searchResults = Jop::join('users', function($j) use($searchWord) {
                         $j->on('users.jop_id', '=', 'jops.id')
                         ->where('users.phone', 'like', "%$searchWord%");
                     })->select("users.id","username","firstname","lastname","phone","email","age","gender","jops.content", "image")
                     ->orderBy('firstname', 'ASC')
                     ->get();
+
                 }
 
                 return Response::json(['result' => $searchResults], 200);
-            }
+            } // end user search about
 
-            if ($request['search_about'] == 'company') {
+
+
+
+
+
+
+            if ($request['search_about'] == 'company') { // start company search about
 
                 if ($request['search_by'] == 'name') {
-                    $searchResultsCompany = Company::where('company_name', 'like', "%$searchWord%")
-                    ->orderBy('company_name', 'ASC')->get();
+
+                    $searchResultsCompany = DB::table('companies')
+                        ->join('bussness_types', 'companies.business_type', '=', 'bussness_types.id')
+                        ->where('companies.company_name', 'like', "%$searchWord%")
+                        // determine the cols that i want
+                        ->select("companies.id","companies.company_name",
+                                 "companies.address","companies.username",
+                                 "companies.phones","companies.website",
+                                 "companies.image","bussness_types.bussness_type as business_type",
+                                 "companies.founder_date")
+                        ->get();
+
                 } elseif($request['search_by'] == 'bussness'){
-                    $searchResultsCompany = BussnessType::join('companies', function($j) use($searchWord) {
-                        $j->on('companies.business_type', '=', 'bussness_types.id')
-                        ->where('bussness_types.bussness_type', 'like', "%$searchWord%");
-                    })
-                    ->orderBy('company_name', 'ASC')
-                    ->get();
+
+                    $searchResultsCompany = DB::table('companies')
+                        ->join('bussness_types', 'companies.business_type', '=', 'bussness_types.id')
+                        ->where('bussness_types.bussness_type', 'like', "%$searchWord%")
+                        // determine the cols that i want
+                        ->select("companies.id","companies.company_name",
+                                 "companies.address","companies.username",
+                                 "companies.phones","companies.website",
+                                 "companies.image","bussness_types.bussness_type as business_type",
+                                 "companies.founder_date")
+                        ->get();
+
                 } elseif($request['search_by'] == 'email'){
-                    $searchResultsCompany = Company::where('username', 'like', "%$searchWord%")
-                    ->orderBy('company_name', 'ASC')
-                    ->get();
+
+                    $searchResultsCompany = DB::table('companies')
+                        ->join('bussness_types', 'companies.business_type', '=', 'bussness_types.id')
+                        ->where('companies.username', 'like', "%$searchWord%")
+                        // determine the cols that i want
+                        ->select("companies.id","companies.company_name",
+                                 "companies.address","companies.username",
+                                 "companies.phones","companies.website",
+                                 "companies.image","bussness_types.bussness_type as business_type",
+                                 "companies.founder_date")
+                        ->get();
+
                 }
                 return Response::json(['result' => $searchResultsCompany],200);
+            } // end company search about
 
-            }
+
+
+
+
         }
     }
