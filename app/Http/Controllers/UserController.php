@@ -45,6 +45,7 @@ class UserController extends Controller
             'gender'      => 'required',
             'jop_id'      => 'required',
         ]);
+
         $user = new User();
         $user->Username = $request['Username'];
         $user->firstname = $request['firstname'];
@@ -82,17 +83,20 @@ class UserController extends Controller
     public function updateProfile(Request $request, $id)
     {
         $this->validate($request, [
-            'Username'  =>  'required|',
-            'firstname' =>  'required|',
-            'lastname'  =>  'required|',
-            'password'  =>  'required|',
-            'phone'     =>  'required|',
-            'email'     =>  'required|email|unique:users'.$id,
-            'age'       =>  'required|',
-            'jop_id'    =>  'required|',
+            'Username'  =>  'required',
+            'firstname' =>  'required',
+            'lastname'  =>  'required',
+            'password'  =>  'required',
+            'phone'     =>  'required',
+            'email'     =>  'required|email',
+            'age'       =>  'required',
+            'jop_id'    =>  'required',
             'image'     =>  'image',
         ]);
         $user = User::find($id);
+
+
+
         $user->Username     = $request['Username'];
         $user->firstname    = $request['firstname'];
         $user->lastname     = $request['lastname'];
@@ -106,9 +110,16 @@ class UserController extends Controller
         if ($user->image == 'src/images/avatar.png') {
             $user->image = $this->upload($request['image']);
         }else {
-            $image = $user->image;
-            unlink('/home7/deziquec/public_html/professearch/'.$image);
-            $user->image = $this->upload($request['image']);
+            if ($request->hasFile('image')) {
+                if ($request->file('image')->isValid()) {
+                    $image = $user->image;
+                    unlink('/home7/deziquec/public_html/professearch/'.$image);
+                    $user->image = $this->upload($request['image']);
+                }
+            }else {
+                $image = $user->image;
+                $user->image == $image;
+            }
         }
         $user->save();
         return redirect()->back()->with(['message' => 'Profile Updated Successfully']);

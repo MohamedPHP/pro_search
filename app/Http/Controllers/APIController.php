@@ -178,4 +178,18 @@ class APIController extends Controller
     }
 
 
+    public function passCheck(Request $request)
+    {
+        $id = $request['id'];
+        $pass = $request['password'];
+
+        $user = User::find($id);
+
+        if (Auth::attempt(['password' => $pass])) {
+            return Response::json(['passOk' => "correct"], 200);
+        }
+        return Response::json(['passOk' => "not correct"], 200);
+    }
+
+
 }

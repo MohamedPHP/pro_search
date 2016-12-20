@@ -171,4 +171,19 @@ class APICompanyController extends Controller
     }
 
 
+
+    public function passCheck(Request $request)
+    {
+        $id = $request['id'];
+        $pass = $request['password'];
+
+        $company = $this->company->find($id);
+
+        if (Auth::guard('Company')->attempt(['password' => $pass])) {
+            return Response::json(['passOk' => "correct"], 200);
+        }
+        return Response::json(['passOk' => "not correct"], 200);
+    }
+
+
 }

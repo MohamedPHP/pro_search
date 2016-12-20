@@ -68,7 +68,7 @@
 		<div class="col-md-9">
             <div class="profile-content">
                 <div class="row">
-                    <form method="post" action="{{ route('company.profile.update', ['id' => $company->id]) }}">
+                    <form method="post" action="{{ route('company.profile.update', ['id' => $company->id]) }}" enctype="multipart/form-data">
                         <h3>Edit Profile</h3>
                         <hr>
                         @if (Session::has('message'))

@@ -68,11 +68,16 @@
         <div class="col-md-9">
             <div class="profile-content">
                 <div class="row">
-                    <form method="post" action="{{ route('user.profile.update', ['id' => Auth::user()->id]) }}">
+                    <form method="post" action="{{ route('user.profile.update', ['id' => Auth::user()->id]) }}" enctype="multipart/form-data">
                         <h3>Edit Profile</h3>
                         <hr>
                         @if (Session::has('message'))
                             <div class="alert alert-success">{{ Session::get('message') }}</div>
+                        @endif
+                        @if (count($errors) > 0)
+                            @foreach ($errors->all() as $error)
+                                <div class="alert alert-danger">{{ $error }}</div>
+                            @endforeach
                         @endif
                         {{ csrf_field() }}
                         <div class="col-md-6">

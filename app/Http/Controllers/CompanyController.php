@@ -129,7 +129,7 @@ class CompanyController extends Controller
         $this->validate($request, [
             'company_name'  =>  'required',
             'address'       =>  'required',
-            'username'      =>  'required|email|unique:companies'.$id,
+            'username'      =>  'required|email',
             'business_type' =>  'required',
             'password'      =>  'required',
             'website'       =>  'url',
@@ -144,12 +144,24 @@ class CompanyController extends Controller
         $company->business_type       = $request['business_type'];
         $company->password      = $request['password'];
         $company->founder_date  = $request['founder_date'];
-        if ($company->image == 'src/images/logo.png') {
-            $company->image = $this->upload($request['image']);
+        if (!empty($request['image'])) {
+            if ($company->image == 'src/images/logo.png') {
+                $company->image = $this->upload($request['image']);
+            }else {
+                if ($request->hasFile('image')) {
+                    if ($request->file('image')->isValid()) {
+                        $image = $company->image;
+                        unlink('/home7/deziquec/public_html/professearch/'.$image);
+                        $company->image = $this->upload($request['image']);
+                    }
+                }else {
+                    $image = $company->image;
+                    $company->image == $image;
+                }
+            }
         }else {
-            $company = $company->image;
-            unlink('/home7/deziquec/public_html/professearch/'.$image);
-            $company->image = $this->upload($request['image']);
+            $image = $company->image;
+            $company->image == $image;
         }
         $company->save();
 

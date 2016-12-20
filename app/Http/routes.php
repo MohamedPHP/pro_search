@@ -366,3 +366,21 @@ Route::group(['prefix'=>'api'], function(){
 
 });
 /*End UserImage Web Survice*/
+
+
+/*Start Password Check For Users*/
+Route::group(['prefix'=>'api'], function(){
+
+    Route::group(['prefix'=>'user'],function(){
+
+        Route::post('password',['uses'=> 'APIController@passCheck']);
+
+    });
+    Route::group(['prefix'=>'company'],function(){
+
+        Route::post('password',['uses'=> 'APICompanyController@passCheck']);
+
+    });
+
+});
+/*End Password Check For Users*/
